@@ -8,22 +8,22 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include "piece.h"
 
 
 using namespace std;
-
 class Spaces {
 public:
-    bool has_piece;
+    Piece piece;
     int space_number;
 
 
     Spaces();
-    Spaces(bool occupied, int space);
+    Spaces(Piece game_piece, int space);
     vector<Spaces> game_board;
 
 
-    bool is_occupied() const;
+    Piece is_occupied() const;
     int get_location() const;
 
 };
