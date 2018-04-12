@@ -1,8 +1,12 @@
+//implement a card deck
+
 #include "card_deck.h"
 #include "card.h"
 
+//fill card_deck with proper number of cards
+//author: Jay Brideau
 void card_deck::fill_deck() {
-	//fill card_deck with proper number of cards
+	//there are 5 'one' cards and 4 of all other cards
 	deck.push_back(card(one));
 	for (int i = 0; i < 4; i++) {
 		deck.push_back(card(one));
@@ -17,4 +21,10 @@ void card_deck::fill_deck() {
 		deck.push_back(card(twelve));
 		deck.push_back(card(sorry));
 	}
+}
+
+//return card at a given index for testing
+//Author: Jay Brideau
+card card_deck::get_card_at(int i) {
+	return deck.at(i);
 }

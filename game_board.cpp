@@ -5,15 +5,16 @@
 #include "game_board.h"
 
 Spaces::Spaces() {
+    has_piece = false;
 }
 
-Spaces::Spaces(Piece game_piece, int space) {
-    piece = game_piece;
+Spaces::Spaces(bool occupied, int space) {
+    has_piece = occupied;
     space_number = space;
 }
 
-Piece Spaces::is_occupied() const {
-    return piece;
+bool Spaces::is_occupied() const {
+    return has_piece;
 }
 
 int Spaces::get_location() const {
