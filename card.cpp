@@ -1,5 +1,8 @@
+//implement a card
 #include "card.h"
 
+//construct a card with a given face value
+//author: Jay Brideau
 card::card(cardface face_given) {
 	face = face_given;
 	switch (face){
@@ -37,4 +40,16 @@ card::card(cardface face_given) {
 		human_rules = "Take one pawn from start, move it to any space occupied by an opponent, and bump that player's pawn back to its START.";
 		break;
 	}
+}
+
+//print out card's information
+//author: Jay Brideau
+void card::print_card_info() {
+	if (face == 13) {
+		cout << "Sorry!" << endl;
+	}
+	else {
+		cout << face << endl;
+	}
+	cout << human_rules << endl;
 }
