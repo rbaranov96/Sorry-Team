@@ -14,4 +14,6 @@ public:
 	card get_card_at_position(int i);
 	//randomly shuffle the deck
 	void shuffle_deck();
+	//pull out the card on the 'top' of the deck and return it to the user
+	card draw_card();
 };

@@ -35,3 +35,11 @@ card card_deck::get_card_at_position(int i) {
 void card_deck::shuffle_deck() {
 	random_shuffle(deck.begin(), deck.end());
 }
+
+//pull out the card on the 'top' of the deck and return it to the user
+//Author: Jay Brideau
+card card_deck::draw_card() {
+	card drawn_card = deck.back();
+	deck.pop_back();
+	return drawn_card;
+}
