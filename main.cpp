@@ -11,7 +11,7 @@ int wd;
 
 void init() {
 	width = 1200;
-	height = 660;
+	height = 720;
 
 }
 
@@ -41,14 +41,666 @@ void display() {
 	//DRAW: base of the game board
 	//AUTHOR: Jay Brideau
 	//16 spaces around the edge
-	int space_pixel_width = 40;
+	int space_pixel_width = 45;
 	glBegin(GL_QUADS);
-	glColor3f(1, .3, .35);
-	glVertex2i(15, 15);
-	glVertex2i((16 * space_pixel_width), 15);
+	glColor3f(0.9, 1, 0.9);
+	glVertex2i(0, 0);
+	glVertex2i((16 * space_pixel_width), 0);
 	glVertex2i((16 * space_pixel_width), (16 * space_pixel_width));
-	glVertex2i(15, (16 * space_pixel_width));
+	glVertex2i(0, (16 * space_pixel_width));
 	glEnd();
+
+	//Draw the spaces around the edge of the board
+	//Author: Jay Brideau
+	//top row of game board
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i(0, 0);
+	glVertex2i((1 * space_pixel_width), 0);
+	glVertex2i((1 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i(0, (1 * space_pixel_width));
+	glEnd();
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i(space_pixel_width, 0);
+	glVertex2i((2 * space_pixel_width), 0);
+	glVertex2i((2 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i(space_pixel_width, (1 * space_pixel_width));
+	glEnd();
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((2 * space_pixel_width), 0);
+	glVertex2i((3 * space_pixel_width), 0);
+	glVertex2i((3 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((2 * space_pixel_width), (1 * space_pixel_width));
+	glEnd();
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((3 * space_pixel_width), 0);
+	glVertex2i((4 * space_pixel_width), 0);
+	glVertex2i((4 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((3 * space_pixel_width), (1 * space_pixel_width));
+	glEnd();
+	//space no: 0
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((4 * space_pixel_width), 0);
+	glVertex2i((5 * space_pixel_width), 0);
+	glVertex2i((5 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((4 * space_pixel_width), (1 * space_pixel_width));
+	glEnd();
+	//space no: 1
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((5 * space_pixel_width), 0);
+	glVertex2i((6 * space_pixel_width), 0);
+	glVertex2i((6 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((5 * space_pixel_width), (1 * space_pixel_width));
+	glEnd();
+	//space no: 2
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((6 * space_pixel_width), 0);
+	glVertex2i((7 * space_pixel_width), 0);
+	glVertex2i((7 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((6 * space_pixel_width), (1 * space_pixel_width));
+	glEnd();
+	//space no: 3
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((7 * space_pixel_width), 0);
+	glVertex2i((8 * space_pixel_width), 0);
+	glVertex2i((8 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((7 * space_pixel_width), (1 * space_pixel_width));
+	glEnd();
+	//space no: 4
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((8 * space_pixel_width), 0);
+	glVertex2i((9 * space_pixel_width), 0);
+	glVertex2i((9 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((8 * space_pixel_width), (1 * space_pixel_width));
+	glEnd();
+	//space no: 5
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((9 * space_pixel_width), 0);
+	glVertex2i((10 * space_pixel_width), 0);
+	glVertex2i((10 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((9 * space_pixel_width), (1 * space_pixel_width));
+	glEnd();
+	//space no: 6
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((10 * space_pixel_width), 0);
+	glVertex2i((11 * space_pixel_width), 0);
+	glVertex2i((11 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((10 * space_pixel_width), (1 * space_pixel_width));
+	glEnd();
+	//space no: 7
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((11 * space_pixel_width), 0);
+	glVertex2i((12 * space_pixel_width), 0);
+	glVertex2i((12 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((11 * space_pixel_width), (1 * space_pixel_width));
+	glEnd();
+	//space no: 8
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((12 * space_pixel_width), 0);
+	glVertex2i((13 * space_pixel_width), 0);
+	glVertex2i((13 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((12 * space_pixel_width), (1 * space_pixel_width));
+	glEnd();
+	//space no: 9
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((13 * space_pixel_width), 0);
+	glVertex2i((14 * space_pixel_width), 0);
+	glVertex2i((14 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((13 * space_pixel_width), (1 * space_pixel_width));
+	glEnd();
+	//space no: 10
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((14 * space_pixel_width), 0);
+	glVertex2i((15 * space_pixel_width), 0);
+	glVertex2i((15 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((14 * space_pixel_width), (1 * space_pixel_width));
+	glEnd();
+	//space no: 11
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((15 * space_pixel_width), 0);
+	glVertex2i((16 * space_pixel_width), 0);
+	glVertex2i((16 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (1 * space_pixel_width));
+	glEnd();
+	//right side of game board
+	//space no: 12
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((15 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (2 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (2 * space_pixel_width));
+	glEnd();
+	//space no: 13
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((15 * space_pixel_width), (2 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (2 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (3 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (3 * space_pixel_width));
+	glEnd();
+	//space no: 14
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((15 * space_pixel_width), (3 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (3 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (4 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (4 * space_pixel_width));
+	glEnd();
+	//space no: 15
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((15 * space_pixel_width), (4 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (4 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (5 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (5 * space_pixel_width));
+	glEnd();
+	//space no: 16
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((15 * space_pixel_width), (5 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (5 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (6 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (6 * space_pixel_width));
+	glEnd();
+	//space no: 17
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((15 * space_pixel_width), (6 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (6 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (7 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (7 * space_pixel_width));
+	glEnd();
+	//space no: 18
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((15 * space_pixel_width), (7 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (7 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (8 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (8 * space_pixel_width));
+	glEnd();
+	//space no: 19
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((15 * space_pixel_width), (8 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (8 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (9 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (9 * space_pixel_width));
+	glEnd();
+	//space no: 20
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((15 * space_pixel_width), (9 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (9 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (10 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (10 * space_pixel_width));
+	glEnd();
+	//space no: 21
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((15 * space_pixel_width), (10 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (10 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (11 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (11 * space_pixel_width));
+	glEnd();
+	//space no: 22
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((15 * space_pixel_width), (11 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (11 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (12 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (12 * space_pixel_width));
+	glEnd();
+	//space no: 23
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((15 * space_pixel_width), (12 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (12 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (13 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (13 * space_pixel_width));
+	glEnd();
+	//space no: 24
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((15 * space_pixel_width), (13 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (13 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (14 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (14 * space_pixel_width));
+	glEnd();
+	//space no: 25
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((15 * space_pixel_width), (14 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (14 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (15 * space_pixel_width));
+	glEnd();
+	//space no: 26
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((15 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((16 * space_pixel_width), (16 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (16 * space_pixel_width));
+	glEnd();
+	//bottom row of game board
+	//space no: 27
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((14 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (16 * space_pixel_width));
+	glVertex2i((14 * space_pixel_width), (16 * space_pixel_width));
+	glEnd();
+	//space no: 28
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((13 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((14 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((14 * space_pixel_width), (16 * space_pixel_width));
+	glVertex2i((13 * space_pixel_width), (16 * space_pixel_width));
+	glEnd();
+	//space no: 29
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((12 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((13 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((13 * space_pixel_width), (16 * space_pixel_width));
+	glVertex2i((12 * space_pixel_width), (16 * space_pixel_width));
+	glEnd();
+	//space no: 30
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((11 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((12 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((12 * space_pixel_width), (16 * space_pixel_width));
+	glVertex2i((11 * space_pixel_width), (16 * space_pixel_width));
+	glEnd();
+	//space no: 31
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((10 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((11 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((11 * space_pixel_width), (16 * space_pixel_width));
+	glVertex2i((10 * space_pixel_width), (16 * space_pixel_width));
+	glEnd();
+	//space no: 32
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((9 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((10 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((10 * space_pixel_width), (16 * space_pixel_width));
+	glVertex2i((9 * space_pixel_width), (16 * space_pixel_width));
+	glEnd();
+	//space no: 33
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((8 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((9 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((9 * space_pixel_width), (16 * space_pixel_width));
+	glVertex2i((8 * space_pixel_width), (16 * space_pixel_width));
+	glEnd();
+	//space no: 34
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((7 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((8 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((8 * space_pixel_width), (16 * space_pixel_width));
+	glVertex2i((7 * space_pixel_width), (16 * space_pixel_width));
+	glEnd();
+	//space no: 35
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((6 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((7 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((7 * space_pixel_width), (16 * space_pixel_width));
+	glVertex2i((6 * space_pixel_width), (16 * space_pixel_width));
+	glEnd();
+	//space no: 36
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((5 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((6 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((6 * space_pixel_width), (16 * space_pixel_width));
+	glVertex2i((5 * space_pixel_width), (16 * space_pixel_width));
+	glEnd();
+	//space no: 37
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((4 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((5 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((5 * space_pixel_width), (16 * space_pixel_width));
+	glVertex2i((4 * space_pixel_width), (16 * space_pixel_width));
+	glEnd();
+	//space no: 38
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((3 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((4 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((4 * space_pixel_width), (16 * space_pixel_width));
+	glVertex2i((3 * space_pixel_width), (16 * space_pixel_width));
+	glEnd();
+	//space no: 39
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((2 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((3 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((3 * space_pixel_width), (16 * space_pixel_width));
+	glVertex2i((2 * space_pixel_width), (16 * space_pixel_width));
+	glEnd();
+	//space no: 40
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((1 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((2 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((2 * space_pixel_width), (16 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (16 * space_pixel_width));
+	glEnd();
+	//space no: 41
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((0 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (16 * space_pixel_width));
+	glVertex2i((0 * space_pixel_width), (16 * space_pixel_width));
+	glEnd();
+	//left side of board game
+	//space no: 42
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((0 * space_pixel_width), (14 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (14 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((0 * space_pixel_width), (15 * space_pixel_width));
+	glEnd();
+	//space no: 43
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((0 * space_pixel_width), (13 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (13 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (14 * space_pixel_width));
+	glVertex2i((0 * space_pixel_width), (14 * space_pixel_width));
+	glEnd();
+	//space no: 44
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((0 * space_pixel_width), (12 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (12 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (13 * space_pixel_width));
+	glVertex2i((0 * space_pixel_width), (13 * space_pixel_width));
+	glEnd();
+	//space no: 45
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((0 * space_pixel_width), (11 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (11 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (12 * space_pixel_width));
+	glVertex2i((0 * space_pixel_width), (12 * space_pixel_width));
+	glEnd();
+	//space no: 46
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((0 * space_pixel_width), (10 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (10 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (11 * space_pixel_width));
+	glVertex2i((0 * space_pixel_width), (11 * space_pixel_width));
+	glEnd();
+	//space no: 47
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((0 * space_pixel_width), (9 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (9 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (10 * space_pixel_width));
+	glVertex2i((0 * space_pixel_width), (10 * space_pixel_width));
+	glEnd();
+	//space no: 48
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((0 * space_pixel_width), (8 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (8 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (9 * space_pixel_width));
+	glVertex2i((0 * space_pixel_width), (9 * space_pixel_width));
+	glEnd();
+	//space no: 49
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((0 * space_pixel_width), (7 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (7 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (8 * space_pixel_width));
+	glVertex2i((0 * space_pixel_width), (8 * space_pixel_width));
+	glEnd();
+	//space no: 50
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((0 * space_pixel_width), (6 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (6 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (7 * space_pixel_width));
+	glVertex2i((0 * space_pixel_width), (7 * space_pixel_width));
+	glEnd();
+	//space no: 51
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((0 * space_pixel_width), (5 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (5 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (6 * space_pixel_width));
+	glVertex2i((0 * space_pixel_width), (6 * space_pixel_width));
+	glEnd();
+	//space no: 52
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((0 * space_pixel_width), (4 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (4 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (5 * space_pixel_width));
+	glVertex2i((0 * space_pixel_width), (5 * space_pixel_width));
+	glEnd();
+	//space no: 53
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((0 * space_pixel_width), (3 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (3 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (4 * space_pixel_width));
+	glVertex2i((0 * space_pixel_width), (4 * space_pixel_width));
+	glEnd();
+	//space no: 54
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((0 * space_pixel_width), (2 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (2 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (3 * space_pixel_width));
+	glVertex2i((0 * space_pixel_width), (3 * space_pixel_width));
+	glEnd();
+	//space no: 55
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);
+	glVertex2i((0 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (2 * space_pixel_width));
+	glVertex2i((0 * space_pixel_width), (2 * space_pixel_width));
+	glEnd();
+	//draw red home stretch
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(1, 0.9, 0.9);
+	glVertex2i((2 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((3 * space_pixel_width), (1 * space_pixel_width));
+	glVertex2i((3 * space_pixel_width), (2 * space_pixel_width));
+	glVertex2i((2 * space_pixel_width), (2 * space_pixel_width));
+	glEnd();
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(1, 0.8, 0.8);
+	glVertex2i((2 * space_pixel_width), (2 * space_pixel_width));
+	glVertex2i((3 * space_pixel_width), (2 * space_pixel_width));
+	glVertex2i((3 * space_pixel_width), (3 * space_pixel_width));
+	glVertex2i((2 * space_pixel_width), (3 * space_pixel_width));
+	glEnd();
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(1, 0.7, 0.7);
+	glVertex2i((2 * space_pixel_width), (3 * space_pixel_width));
+	glVertex2i((3 * space_pixel_width), (3 * space_pixel_width));
+	glVertex2i((3 * space_pixel_width), (4 * space_pixel_width));
+	glVertex2i((2 * space_pixel_width), (4 * space_pixel_width));
+	glEnd();
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(1, 0.6, 0.6);
+	glVertex2i((2 * space_pixel_width), (4 * space_pixel_width));
+	glVertex2i((3 * space_pixel_width), (4 * space_pixel_width));
+	glVertex2i((3 * space_pixel_width), (5 * space_pixel_width));
+	glVertex2i((2 * space_pixel_width), (5 * space_pixel_width));
+	glEnd();
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(1, 0.5, 0.5);
+	glVertex2i((2 * space_pixel_width), (5 * space_pixel_width));
+	glVertex2i((3 * space_pixel_width), (5 * space_pixel_width));
+	glVertex2i((3 * space_pixel_width), (6 * space_pixel_width));
+	glVertex2i((2 * space_pixel_width), (6 * space_pixel_width));
+	glEnd();
+	//blue home run
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(0.9, 0.9, 1);
+	glVertex2i((14 * space_pixel_width), (2 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (2 * space_pixel_width));
+	glVertex2i((15 * space_pixel_width), (3 * space_pixel_width));
+	glVertex2i((14 * space_pixel_width), (3 * space_pixel_width));
+	glEnd();
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 0.8, 1);
+	glVertex2i((13 * space_pixel_width), (2 * space_pixel_width));
+	glVertex2i((14 * space_pixel_width), (2 * space_pixel_width));
+	glVertex2i((14 * space_pixel_width), (3 * space_pixel_width));
+	glVertex2i((13 * space_pixel_width), (3 * space_pixel_width));
+	glEnd();
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(0.7, 0.7, 1);
+	glVertex2i((12 * space_pixel_width), (2 * space_pixel_width));
+	glVertex2i((13 * space_pixel_width), (2 * space_pixel_width));
+	glVertex2i((13 * space_pixel_width), (3 * space_pixel_width));
+	glVertex2i((12 * space_pixel_width), (3 * space_pixel_width));
+	glEnd();
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(0.6, 0.6, 1);
+	glVertex2i((11 * space_pixel_width), (2 * space_pixel_width));
+	glVertex2i((12 * space_pixel_width), (2 * space_pixel_width));
+	glVertex2i((12 * space_pixel_width), (3 * space_pixel_width));
+	glVertex2i((11 * space_pixel_width), (3 * space_pixel_width));
+	glEnd();
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(0.5, 0.5, 1);
+	glVertex2i((10 * space_pixel_width), (2 * space_pixel_width));
+	glVertex2i((11 * space_pixel_width), (2 * space_pixel_width));
+	glVertex2i((11 * space_pixel_width), (3 * space_pixel_width));
+	glVertex2i((10 * space_pixel_width), (3 * space_pixel_width));
+	glEnd();
+	//yellow home run
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 0.9);
+	glVertex2i((13 * space_pixel_width), (14 * space_pixel_width));
+	glVertex2i((14 * space_pixel_width), (14 * space_pixel_width));
+	glVertex2i((14 * space_pixel_width), (15 * space_pixel_width));
+	glVertex2i((13 * space_pixel_width), (15 * space_pixel_width));
+	glEnd();
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 0.8);
+	glVertex2i((13 * space_pixel_width), (13 * space_pixel_width));
+	glVertex2i((14 * space_pixel_width), (13 * space_pixel_width));
+	glVertex2i((14 * space_pixel_width), (14 * space_pixel_width));
+	glVertex2i((13 * space_pixel_width), (14 * space_pixel_width));
+	glEnd();
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 0.7);
+	glVertex2i((13 * space_pixel_width), (12 * space_pixel_width));
+	glVertex2i((14 * space_pixel_width), (12 * space_pixel_width));
+	glVertex2i((14 * space_pixel_width), (13 * space_pixel_width));
+	glVertex2i((13 * space_pixel_width), (13 * space_pixel_width));
+	glEnd();
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 0.6);
+	glVertex2i((13 * space_pixel_width), (11 * space_pixel_width));
+	glVertex2i((14 * space_pixel_width), (11 * space_pixel_width));
+	glVertex2i((14 * space_pixel_width), (12 * space_pixel_width));
+	glVertex2i((13 * space_pixel_width), (12 * space_pixel_width));
+	glEnd();
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 0.5);
+	glVertex2i((13 * space_pixel_width), (10 * space_pixel_width));
+	glVertex2i((14 * space_pixel_width), (10 * space_pixel_width));
+	glVertex2i((14 * space_pixel_width), (11 * space_pixel_width));
+	glVertex2i((13 * space_pixel_width), (11 * space_pixel_width));
+	glEnd();
+	//green home run
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(0.8, 1, 0.8);
+	glVertex2i((1 * space_pixel_width), (13 * space_pixel_width));
+	glVertex2i((2 * space_pixel_width), (13 * space_pixel_width));
+	glVertex2i((2 * space_pixel_width), (14 * space_pixel_width));
+	glVertex2i((1 * space_pixel_width), (14 * space_pixel_width));
+	glEnd();
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(0.7, 1, 0.7);
+	glVertex2i((2 * space_pixel_width), (13 * space_pixel_width));
+	glVertex2i((3 * space_pixel_width), (13 * space_pixel_width));
+	glVertex2i((3 * space_pixel_width), (14 * space_pixel_width));
+	glVertex2i((2 * space_pixel_width), (14 * space_pixel_width));
+	glEnd();
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(0.6, 1, 0.6);
+	glVertex2i((3 * space_pixel_width), (13 * space_pixel_width));
+	glVertex2i((4 * space_pixel_width), (13 * space_pixel_width));
+	glVertex2i((4 * space_pixel_width), (14 * space_pixel_width));
+	glVertex2i((3 * space_pixel_width), (14 * space_pixel_width));
+	glEnd();
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(0.5, 1, 0.5);
+	glVertex2i((4 * space_pixel_width), (13 * space_pixel_width));
+	glVertex2i((5 * space_pixel_width), (13 * space_pixel_width));
+	glVertex2i((5 * space_pixel_width), (14 * space_pixel_width));
+	glVertex2i((4 * space_pixel_width), (14 * space_pixel_width));
+	glEnd();
+	//space no: 
+	glBegin(GL_QUADS);
+	glColor3f(0.4, 1, 0.4);
+	glVertex2i((5 * space_pixel_width), (13 * space_pixel_width));
+	glVertex2i((6 * space_pixel_width), (13 * space_pixel_width));
+	glVertex2i((6 * space_pixel_width), (14 * space_pixel_width));
+	glVertex2i((5 * space_pixel_width), (14 * space_pixel_width));
+	glEnd();
+
 
 	glFlush();  // Render now
 }
