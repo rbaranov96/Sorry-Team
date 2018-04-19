@@ -6,14 +6,19 @@
 
 using namespace std;
 
-int wd;
 int width, height;
-//Graphics/GUI
+int wd;
+
+void init() {
+	width = 1200;
+	height = 660;
+
+}
 
 /* Initialize OpenGL Graphics */
 void initGL() {
 	// Set "clearing" or background color
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f); // almost black and opaque
+	glClearColor(0.1f, 0.1f, 0.5f, 1.0f); // almost black and opaque
 
 }
 
@@ -21,7 +26,7 @@ void initGL() {
 whenever the window needs to be re-painted. */
 void display() {
 	// tell OpenGL to use the whole window for drawing
-	glViewport(0, 0, 1200, 900);
+	glViewport(0, 0, width, height);
 
 	// do an orthographic parallel projection with the coordinate
 	// system set to first quadrant, limited by screen/window size
@@ -33,16 +38,22 @@ void display() {
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
+	//DRAW: base of the game board
+	//AUTHOR: Jay Brideau
+	//16 spaces around the edge
+	int space_pixel_width = 40;
+	glBegin(GL_QUADS);
+	glColor3f(1, .3, .35);
+	glVertex2i(15, 15);
+	glVertex2i((16 * space_pixel_width), 15);
+	glVertex2i((16 * space_pixel_width), (16 * space_pixel_width));
+	glVertex2i(15, (16 * space_pixel_width));
+	glEnd();
+
 	glFlush();  // Render now
 }
 
-void kbd(unsigned char key, int x, int y) //CHECK MORE OFTEN 
-//only checks when key registers as pressed, overrides 'old' keypress data even if current
-{
-	//jump
-	if (key == 32) {
-		cout << "space key pressed!" << endl;
-	}
+void kbd(unsigned char key, int x, int y) {
 
 	glutPostRedisplay();
 
@@ -54,30 +65,18 @@ void timer(int extra) {
 	glutPostRedisplay();
 }
 
+
+
 int main(int argc, char** argv) {
 
-	//card deck
-	card_deck deck = card_deck();
-	deck.fill_deck();
-
-	//test card deck fill
-	//for (int i = 0; i < 45; i++) {
-	//	card print = deck.get_card_at(i);
-	//	print.print_info();
-	//}
-	
-	//GUI
-
-	//set window width and height
-	width = 1200;
-	height = 900;
+	init();
 
 	glutInit(&argc, argv);          // Initialize GLUT
 
 	glutInitDisplayMode(GLUT_RGBA);
 
-	glutInitWindowSize(width, height);
-	glutInitWindowPosition(100, 100); // Position the window's initial top-left corner
+	glutInitWindowSize((int)width, (int)height);
+	glutInitWindowPosition(50, 50); // Position the window's initial top-left corner
 									  /* create the window and store the handle to it */
 	wd = glutCreateWindow("Sorry!" /* title */);
 
@@ -96,19 +95,5 @@ int main(int argc, char** argv) {
 
 	// Enter the event-processing loop
 	glutMainLoop();
-
-    //Spaces my_space;
-    //vector<Spaces> game_board;
-    //for (int i = 1; i <= 60; i++){
-        //bool has_piece;
-        //game_board.push_back(Spaces(has_piece, i ));
-    //}
-    //cout << "The outside ring of the game board has " << game_board.size()<< " pieces" << endl;
-
-	//keep window open
-	cout << "Press Enter to close window" << endl;
-	getchar();
 	return 0;
-
-    return 0;
 }
