@@ -18,7 +18,16 @@ void move(int i,vector<Piece> game_board,Piece piece,Piece red_piece,Piece blue_
                 player1.pop_back();
                 game_board[0] = red_piece;
                 cout << "A " <<game_board[0].get_color()<< " piece has entered the gameboard" << endl;
-            } else if (player1.size() == 0) {
+            } else if ((m == 1 | m == 2) && (player1.size() != 0) && ((game_board[0].get_color() == "blue"))||((game_board[0].get_color() == "green"))||((game_board[0].get_color() == "yellow"))) {
+                player1.pop_back();
+                game_board[0] = red_piece;
+                cout << "A " <<game_board[0].get_color()<< " piece has entered the gameboard" << endl;
+                if ((game_board[0].get_color() == "blue")){player2.push_back(blue_piece);}
+                if ((game_board[0].get_color() == "green")){player3.push_back(green_piece);}
+                if ((game_board[0].get_color() == "yelllow")){player4.push_back(yellow_piece);}
+            }
+
+            else if (player1.size() == 0) {
                 cout << "All your pieces are on the board" << endl;
             }
         } else {
@@ -30,6 +39,8 @@ void move(int i,vector<Piece> game_board,Piece piece,Piece red_piece,Piece blue_
                     valid_p.push_back(i);
                 }
             }
+            for (int j =0 ; j<valid_p.size();j++){cout<<valid_p[j];}
+            cout <<endl;
             int p_for_red, moves;
             cout << "Player 1: Enter the position of the peice you want to move" << endl;
             cin >> p_for_red;
@@ -49,45 +60,163 @@ void move(int i,vector<Piece> game_board,Piece piece,Piece red_piece,Piece blue_
 
     }
     if (i==1) {
-        cout<<"Player 2: Enter the no of moves"<<endl;
+
+        cout << "Player 2: Enter the card no " << endl;
         int m;
-        cin>>m;
-        if ((m == 1|m == 2 ) && (player2.size() != 0)&&(game_board[14].get_color()=="empty")){
-            player2.pop_back();
-            game_board[14] = blue_piece;
+        cin >> m;
+        int y;
+        if (m == 1 | m == 2) {
+            cout << "Player 2: Do you want to place your peice on the board from the start area" << endl;
+            cin >> y;
         }
-        else if (player2.size() == 0){
-            cout << "All your pieces are on the board" << endl;
+        if (y==1) {
+            if ((m == 1 | m == 2) && (player2.size() != 0) && (game_board[14].get_color() == "empty")) {
+                player2.pop_back();
+                game_board[14] = blue_piece;
+                cout << "A " <<game_board[14].get_color()<< " piece has entered the gameboard" << endl;
+            }else if ((m == 1 | m == 2) && (player2.size() != 0) && ((game_board[14].get_color() == "red")||((game_board[14].get_color() == "green"))||((game_board[14].get_color() == "yellow")))) {
+                player2.pop_back();
+                game_board[14] = blue_piece;
+                cout << "A " <<game_board[14].get_color()<< " piece has entered the gameboard" << endl;
+                if ((game_board[14].get_color() == "red")){player1.push_back(red_piece);}
+                if ((game_board[14].get_color() == "green")){player3.push_back(green_piece);}
+                if ((game_board[14].get_color() == "yelllow")){player4.push_back(yellow_piece);}
+            }
+
+            else if (player2.size() == 0) {
+                cout << "All your pieces are on the board" << endl;
+            }
+        } else {
+            cout << "Player 2: Position of all the blue peices on the board" << endl;
+            vector<int> valid_p;
+            for (int i = 0; i < 60; i++) {
+                if (game_board[i].get_color() == "blue") {
+                    cout << i << endl;
+                    valid_p.push_back(i);
+                }
+            }
+            for (int j =0 ; j<valid_p.size();j++){cout<<valid_p[j];}
+            cout <<endl;
+            int p_for_blue, moves;
+            cout << "Player 2: Enter the position of the peice you want to move" << endl;
+            cin >> p_for_blue;
+            cout << "Player 2: enter the moves" << endl;
+            cin >> moves;
+            if ((moves + p_for_blue) > 59) {
+                moves = moves - (59 - p_for_blue);
+            } else {
+                moves = moves + p_for_blue;
+            }
+            game_board[moves] = blue_piece;
+            game_board[p_for_blue]= piece;
+            valid_p.clear();
         }
-        cout << game_board[14].get_color() << endl;
-        //moves(m,loop,p1,wp2);
 
     }
     if (i==2) {
-        cout<<"Player 3: Enter the no of moves"<<endl;
+
+        cout << "Player 3: Enter the card no " << endl;
         int m;
-        cin>>m;
-        if ((m == 1|m == 2 ) && (player3.size() != 0)&&(game_board[29].get_color()=="empty")){
-            player3.pop_back();
-            game_board[29] = green_piece;
+        cin >> m;
+        int y;
+        if (m == 1 | m == 2) {
+            cout << "Player 3: Do you want to place your peice on the board from the start area" << endl;
+            cin >> y;
         }
-        else if (player3.size() == 0){
-            cout << "All your pieces are on the board" << endl;
+        if (y==1) {
+            if ((m == 1 | m == 2) && (player3.size() != 0) && (game_board[29].get_color() == "empty")){
+                player3.pop_back();
+                game_board[29] = green_piece;
+                cout << "A " <<game_board[29].get_color()<< " piece has entered the gameboard" << endl;
+            } else if ((m == 1 | m == 2) && (player3.size() != 0) && ( (game_board[29].get_color() == "red")||(game_board[29].get_color() == "blue")|| (game_board[29].get_color() == "yellow"))) {
+                player3.pop_back();
+                game_board[29] = green_piece;
+                cout << "A " <<game_board[29].get_color()<< " piece has entered the gameboard" << endl;
+                if ((game_board[29].get_color() == "red")){player1.push_back(red_piece);}
+                if ((game_board[29].get_color() == "blue")){player2.push_back(blue_piece);}
+                if ((game_board[29].get_color() == "yellow")){player4.push_back(yellow_piece);}
+            }
+
+            else if (player3.size() == 0) {
+                cout << "All your pieces are on the board" << endl;
+            }
+        } else {
+            cout << "Player 3: Position of all the green peices on the board" << endl;
+            vector<int> valid_p;
+            for (int i = 0; i < 60; i++) {
+                if (game_board[i].get_color() == "green") {
+                    cout << i << endl;
+                    valid_p.push_back(i);
+                }
+            }
+            for (int j =0 ; j<valid_p.size();j++){cout<<valid_p[j];}
+            cout <<endl;
+            int p_for_green, moves;
+            cout << "Player 3: Enter the position of the peice you want to move" << endl;
+            cin >> p_for_green;
+            cout << "Player 3: enter the moves" << endl;
+            cin >> moves;
+            if ((moves + p_for_green) > 59) {
+                moves = moves - (59 - p_for_green);
+            } else {
+                moves = moves + p_for_green;
+            }
+            game_board[moves] = green_piece;
+            game_board[p_for_green]= piece;
+            valid_p.clear();
         }
-        cout << game_board[29].get_color() << endl;
     }
     if (i==3) {
-        cout<<"Player 4: Enter the no of moves"<<endl;
+
+        cout << "Player 4: Enter the card no " << endl;
         int m;
-        cin>>m;
-        if ((m == 1|m == 2 ) && (player4.size() != 0)&&(game_board[44].get_color()=="empty")){
-            player4.pop_back();
-            game_board[44] = yellow_piece;
+        cin >> m;
+        int y;
+        if (m == 1 | m == 2) {
+            cout << "Player 4: Do you want to place your peice on the board from the start area" << endl;
+            cin >> y;
         }
-        else if (player4.size() == 0){
-            cout << "All your pieces are on the board" << endl;
+        if (y==1) {
+            if ((m == 1 | m == 2) && (player4.size() != 0) && (game_board[44].get_color() == "empty")) {
+                player4.pop_back();
+                game_board[44] = yellow_piece;
+                cout << "A " <<game_board[44].get_color()<< " piece has entered the gameboard" << endl;
+            } else if ((m == 1 | m == 2) && (player4.size() != 0) && ((game_board[44].get_color() == "red"))||((game_board[44].get_color() == "blue"))||((game_board[44].get_color() == "green"))) {
+                player4.pop_back();
+                game_board[44] = yellow_piece;
+                cout << "A " <<game_board[44].get_color()<< " piece has entered the gameboard" << endl;
+                if ((game_board[44].get_color() == "red")){player1.push_back(red_piece);}
+                if ((game_board[44].get_color() == "blue")){player2.push_back(blue_piece);}
+                if ((game_board[44].get_color() == "green")){player3.push_back(green_piece);}
+            }
+            else if (player4.size() == 0) {
+                cout << "All your pieces are on the board" << endl;
+            }
+        } else {
+            cout << "Player 4: Position of all the yellow peices on the board" << endl;
+            vector<int> valid_p;
+            for (int i = 0; i < 60; i++) {
+                if (game_board[i].get_color() == "yellow") {
+                    cout << i << endl;
+                    valid_p.push_back(i);
+                }
+            }
+            for (int j =0 ; j<valid_p.size();j++){cout<<valid_p[j];}
+            cout <<endl;
+            int p_for_yellow, moves;
+            cout << "Player 4: Enter the position of the peice you want to move" << endl;
+            cin >> p_for_yellow;
+            cout << "Player 4: enter the moves" << endl;
+            cin >> moves;
+            if ((moves + p_for_yellow) > 59) {
+                moves = moves - (59 - p_for_yellow);
+            } else {
+                moves = moves + p_for_yellow;
+            }
+            game_board[moves] = yellow_piece;
+            game_board[p_for_yellow]= piece;
+            valid_p.clear();
         }
-        cout << game_board[44].get_color() << endl;
     }
 
 }
