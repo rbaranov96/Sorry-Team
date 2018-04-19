@@ -16,4 +16,10 @@ public:
 	void shuffle_deck();
 	//pull out the card on the 'top' of the deck and return it to the user
 	card draw_card();
+	//pull out card on top of the deck and put it into a given discard deck
+	card draw_card_discard(card_deck discard_deck);
+
+//private:
+	//method to add a card to a deck
+	void add_card(card added_card);
 };

@@ -43,3 +43,18 @@ card card_deck::draw_card() {
 	deck.pop_back();
 	return drawn_card;
 }
+
+//pull out card on top of the deck and put it into a given discard deck
+//Author: Jay Brideau
+card card_deck::draw_card_discard(card_deck discard_deck) {
+	card drawn_card = deck.back();
+	//discard_deck.deck.push_back(drawn_card);
+	discard_deck.add_card(drawn_card);
+	deck.pop_back();
+	return drawn_card;
+}
+
+//method to add a card to a deck
+void card_deck::add_card(card added_card) {
+	deck.push_back(added_card);
+}
