@@ -1,4 +1,7 @@
+#define _USE_MATH_DEFINES
+#include <cmath> 
 #include <iostream>
+#include <fstream>
 #include "game_board.h"
 #include "piece.h"
 #include "graphics.hpp"
@@ -10,10 +13,15 @@ int width, height;
 int wd;
 card_deck discard_deck;
 card_deck draw_deck;
+int space_pixel_width = 45;
+
+//TEST CLICKABILITY
+int mouse_x, mouse_y;
 
 void init() {
 	width = 1200;
 	height = 720;
+	mouse_x = mouse_y = 0;
 }
 
 /* Initialize OpenGL Graphics */
@@ -27,7 +35,6 @@ void draw_gameboard() {
 	//DRAW: base of the game board
 	//AUTHOR: Jay Brideau
 	//16 spaces around the edge
-	int space_pixel_width = 45;
 	glBegin(GL_QUADS);
 	glColor3f(0.9, 1, 0.9);
 	glVertex2i(0, 0);
@@ -708,6 +715,16 @@ void draw_gameboard() {
 	glVertex2i(940, 590);
 	glVertex2i(740, 590);
 	glEnd();
+
+	//test circle
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3f(0.5, 0.5, 0.5);
+	glVertex2i((2 * space_pixel_width + (space_pixel_width / 2)), 4 * space_pixel_width + (space_pixel_width / 2));
+	for (int i = 0; i <= 360; ++i) {
+		glVertex2i( (2*space_pixel_width + (space_pixel_width/2)) + 20 * cos(i * M_PI / 180.0),
+			(4*space_pixel_width + (space_pixel_width / 2)) + 20 * sin(i * M_PI / 180.0));
+	}
+	glEnd();
 }
 
 /* Handler for window-repaint event. Call back when the window first appears and
@@ -739,6 +756,18 @@ void kbd(unsigned char key, int x, int y) {
 	return;
 }
 
+//TEST CLICKABILITY
+void mouse(int button, int state, int x, int y) {
+	if (x >= 0 && x <= space_pixel_width && y >= 0
+		&& y <= space_pixel_width) {
+		cout << "clicked!" << endl; 
+		init();
+	}
+	
+
+	glutPostRedisplay();
+}
+
 void timer(int extra) {
 	glutTimerFunc(60, timer, 0);
 	glutPostRedisplay();
@@ -768,6 +797,9 @@ int main(int argc, char** argv) {
 	// register keyboard press event processing function
 	// works for numbers, letters, spacebar, etc.
 	glutKeyboardFunc(kbd);
+
+	//handle clickability
+	glutMouseFunc(mouse);
 
 	// handles timer
 	glutTimerFunc(0, timer, 0);
