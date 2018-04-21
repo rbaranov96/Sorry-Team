@@ -8,11 +8,12 @@ using namespace std;
 
 int width, height;
 int wd;
+card_deck discard_deck;
+card_deck draw_deck;
 
 void init() {
 	width = 1200;
 	height = 720;
-
 }
 
 /* Initialize OpenGL Graphics */
@@ -22,22 +23,7 @@ void initGL() {
 
 }
 
-/* Handler for window-repaint event. Call back when the window first appears and
-whenever the window needs to be re-painted. */
-void display() {
-	// tell OpenGL to use the whole window for drawing
-	glViewport(0, 0, width, height);
-
-	// do an orthographic parallel projection with the coordinate
-	// system set to first quadrant, limited by screen/window size
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(0.0, width, height, 0.0, -1.f, 1.f);
-
-	glClear(GL_COLOR_BUFFER_BIT);   // Clear the color buffer with current clearing color
-
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
+void draw_gameboard() {
 	//DRAW: base of the game board
 	//AUTHOR: Jay Brideau
 	//16 spaces around the edge
@@ -701,6 +687,47 @@ void display() {
 	glVertex2i((5 * space_pixel_width), (14 * space_pixel_width));
 	glEnd();
 
+	//draw the card decks
+	//Author: Jay Brideau
+	//Discard deck
+	if (discard_deck.deck.size() != 0) {
+		glBegin(GL_QUADS);
+		glColor3f(0, 1, 0);
+		glVertex2i(740, 20);
+		glVertex2i(1090, 20);
+		glVertex2i(1090, 220);
+		glVertex2i(740, 220);
+		glEnd();
+	}
+	
+	//Draw deck
+	glBegin(GL_QUADS);
+	glColor3f(0, 1, 1);
+	glVertex2i(740, 240);
+	glVertex2i(940, 240);
+	glVertex2i(940, 590);
+	glVertex2i(740, 590);
+	glEnd();
+}
+
+/* Handler for window-repaint event. Call back when the window first appears and
+whenever the window needs to be re-painted. */
+void display() {
+	// tell OpenGL to use the whole window for drawing
+	glViewport(0, 0, width, height);
+
+	// do an orthographic parallel projection with the coordinate
+	// system set to first quadrant, limited by screen/window size
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0.0, width, height, 0.0, -1.f, 1.f);
+
+	glClear(GL_COLOR_BUFFER_BIT);   // Clear the color buffer with current clearing color
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	//draw the game board gui
+	draw_gameboard();
 
 	glFlush();  // Render now
 }
