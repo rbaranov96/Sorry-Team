@@ -15,6 +15,9 @@ card_deck discard_deck;
 card_deck draw_deck;
 int space_pixel_width = 45;
 
+int test_piece_x = (4 * space_pixel_width + (space_pixel_width/2));
+int test_piece_y = space_pixel_width / 2;
+
 //TEST CLICKABILITY
 int mouse_x, mouse_y;
 
@@ -718,11 +721,11 @@ void draw_gameboard() {
 
 	//test circle
 	glBegin(GL_TRIANGLE_FAN);
-	glColor3f(0.5, 0.5, 0.5);
-	glVertex2i((2 * space_pixel_width + (space_pixel_width / 2)), 4 * space_pixel_width + (space_pixel_width / 2));
+	glColor3f(1, 0, 0);
+	glVertex2i(test_piece_x, test_piece_y);
 	for (int i = 0; i <= 360; ++i) {
-		glVertex2i( (2*space_pixel_width + (space_pixel_width/2)) + 20 * cos(i * M_PI / 180.0),
-			(4*space_pixel_width + (space_pixel_width / 2)) + 20 * sin(i * M_PI / 180.0));
+		glVertex2i( test_piece_x + 20 * cos(i * M_PI / 180.0),
+			test_piece_y + 20 * sin(i * M_PI / 180.0));
 	}
 	glEnd();
 }
@@ -758,9 +761,9 @@ void kbd(unsigned char key, int x, int y) {
 
 //TEST CLICKABILITY
 void mouse(int button, int state, int x, int y) {
-	if (x >= 0 && x <= space_pixel_width && y >= 0
-		&& y <= space_pixel_width) {
-		cout << "clicked!" << endl; 
+	if (x >= test_piece_x - (space_pixel_width/2) && x <= test_piece_x + space_pixel_width/2 && y >= test_piece_y - (space_pixel_width/2)
+		&& y <= test_piece_y + space_pixel_width/2) {
+		test_piece_x += space_pixel_width;
 		init();
 	}
 	
