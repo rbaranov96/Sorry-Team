@@ -23,6 +23,8 @@ int test_piece_y = space_pixel_width / 2;
 //GAME BOARD CLICKABILITY
 int mouse_x, mouse_y;
 
+string card_rules = "No card has been drawn yet.";
+
 //initialize variables
 //Author: Jay Brideau
 void init() {
@@ -738,6 +740,12 @@ void draw_gameboard() {
 		glVertex2i(1090, 220);
 		glVertex2i(740, 220);
 		glEnd();
+		string discard_label = "Discard pile";
+		glColor3f(0, 0, 0);
+		glRasterPos2i(740, 40);
+		for (int i = 0; i < discard_label.length(); ++i) {
+			glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, discard_label[i]);
+		}
 	}
 	
 	//Draw deck
@@ -748,6 +756,12 @@ void draw_gameboard() {
 	glVertex2i(940, 590);
 	glVertex2i(740, 590);
 	glEnd();
+	//draw card's rules
+	glColor3f(0, 0, 0);
+	glRasterPos2i(740, 270);
+	for (int i = 0; i < card_rules.length(); ++i) {
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, card_rules[i]);
+	}
 
 	//test circle
 	glBegin(GL_TRIANGLE_FAN);
@@ -760,28 +774,30 @@ void draw_gameboard() {
 	glEnd();
 }
 
-	/* Handler for window-repaint event. Call back when the window first appears and
-	whenever the window needs to be re-painted. */
-	void display() {
-		// tell OpenGL to use the whole window for drawing
-		glViewport(0, 0, width, height);
+/* Handler for window-repaint event. Call back when the window first appears and
+whenever the window needs to be re-painted. */
+//Author: Professor Lisa Dion
+void display() {
+	// tell OpenGL to use the whole window for drawing
+	glViewport(0, 0, width, height);
 
-		// do an orthographic parallel projection with the coordinate
-		// system set to first quadrant, limited by screen/window size
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(0.0, width, height, 0.0, -1.f, 1.f);
+	// do an orthographic parallel projection with the coordinate
+	// system set to first quadrant, limited by screen/window size
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0.0, width, height, 0.0, -1.f, 1.f);
 
-		glClear(GL_COLOR_BUFFER_BIT);   // Clear the color buffer with current clearing color
+	glClear(GL_COLOR_BUFFER_BIT);   // Clear the color buffer with current clearing color
 
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-		//draw the game board gui
-		draw_gameboard();
+	//draw the game board gui
+	draw_gameboard();
 
-		glFlush();  // Render now
-	}
+	glFlush();  // Render now
+}
 
+// hande keyboard input
 void kbd(unsigned char key, int x, int y) {
 
 	glutPostRedisplay();
@@ -824,19 +840,21 @@ void mouse(int button, int state, int x, int y) {
 	if (x >= 740 && x <= 944 && y >= 240 && y <= 590
 		&& state == GLUT_DOWN) {
 		card drawn_card = draw_and_discard_card();
+		card_rules = drawn_card.human_rules;
 		drawn_card.print_info();
 	}
 
 	glutPostRedisplay();
 }
 
+//timer function
+//Author: Professor  Lisa Dion
 void timer(int extra) {
 	glutTimerFunc(60, timer, 0);
 	glutPostRedisplay();
 }
 
-
-
+//main function
 int main(int argc, char** argv) {
 
 	init();
