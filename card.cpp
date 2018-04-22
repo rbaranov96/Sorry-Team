@@ -13,7 +13,7 @@ card::card(cardface face_given) {
 		human_rules = "Either start a pawn OR move one pawn forward 2 spaces. Draw again.";
 		break;
 	case three:
-		human_rules = "Move one pawn forawrd 3 spaces.";
+		human_rules = "Move one pawn forward 3 spaces.";
 		break;
 	case four:
 		human_rules = "Move one pawn backwards 4 spaces.";
@@ -45,6 +45,11 @@ card::card(cardface face_given) {
 //print out card's information
 //author: Jay Brideau
 void card::print_info() {
-	cout << face << endl;
+	if (face == 13) {
+		cout << "Sorry!" << endl;
+	}
+	else {
+		cout << face << endl;
+	}
 	cout << human_rules << endl;
 }

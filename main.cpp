@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <ctime>
 #include "piece.h"
 #include "graphics.hpp"
 #include "card_deck.h"
@@ -19,10 +20,14 @@ int space_pixel_width = 45;
 int test_piece_x = (4 * space_pixel_width + (space_pixel_width/2));
 int test_piece_y = space_pixel_width / 2;
 
-//TEST CLICKABILITY
+//GAME BOARD CLICKABILITY
 int mouse_x, mouse_y;
 
+//initialize variables
+//Author: Jay Brideau
 void init() {
+	//seed true random
+	srand(time(NULL));
 	width = 1200;
 	height = 720;
 	mouse_x = mouse_y = 0;
@@ -33,13 +38,35 @@ void init() {
 /* Initialize OpenGL Graphics */
 void initGL() {
 	// Set "clearing" or background color
-	glClearColor(0.1f, 0.1f, 0.5f, 1.0f); // almost black and opaque
-
+	glClearColor(0.1f, 0.1f, 0.5f, 1.0f); // background color for game board gui
 }
 
+//draw a card from the draw deck and discard it to the discard deck
+//Author: Jay Brideau
+card draw_and_discard_card() {
+	if (draw_deck.deck.size() > 0) {
+		card drawn_card = draw_deck.draw_card();
+		discard_deck.add_card(drawn_card);
+		return drawn_card;
+	}
+	else {
+		for (int i = 0; i < 45; i++) {
+			card return_to_draw = discard_deck.draw_card();
+			draw_deck.add_card(return_to_draw);
+		}
+		draw_deck.shuffle_deck();
+		card drawn_card = draw_deck.draw_card();
+		discard_deck.add_card(drawn_card);
+		return drawn_card;
+	}
+	
+}
+
+//draw the game board GUI
+//AUTHOR: Jay Brideau
 void draw_gameboard() {
 	//DRAW: base of the game board
-	//AUTHOR: Jay Brideau
+	//Author: Jay Brideau
 	//16 spaces around the edge
 	glBegin(GL_QUADS);
 	glColor3f(0.9, 1, 0.9);
@@ -733,27 +760,27 @@ void draw_gameboard() {
 	glEnd();
 }
 
-/* Handler for window-repaint event. Call back when the window first appears and
-whenever the window needs to be re-painted. */
-void display() {
-	// tell OpenGL to use the whole window for drawing
-	glViewport(0, 0, width, height);
+	/* Handler for window-repaint event. Call back when the window first appears and
+	whenever the window needs to be re-painted. */
+	void display() {
+		// tell OpenGL to use the whole window for drawing
+		glViewport(0, 0, width, height);
 
-	// do an orthographic parallel projection with the coordinate
-	// system set to first quadrant, limited by screen/window size
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(0.0, width, height, 0.0, -1.f, 1.f);
+		// do an orthographic parallel projection with the coordinate
+		// system set to first quadrant, limited by screen/window size
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(0.0, width, height, 0.0, -1.f, 1.f);
 
-	glClear(GL_COLOR_BUFFER_BIT);   // Clear the color buffer with current clearing color
+		glClear(GL_COLOR_BUFFER_BIT);   // Clear the color buffer with current clearing color
 
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-	//draw the game board gui
-	draw_gameboard();
+		//draw the game board gui
+		draw_gameboard();
 
-	glFlush();  // Render now
-}
+		glFlush();  // Render now
+	}
 
 void kbd(unsigned char key, int x, int y) {
 
@@ -762,8 +789,11 @@ void kbd(unsigned char key, int x, int y) {
 	return;
 }
 
-//TEST CLICKABILITY
+//allow user to click things
+//Author: Jay Brideau
 void mouse(int button, int state, int x, int y) {
+	//user can click on a test piece to move it around the board
+	//Author: Jay Brideau
 	if (
 		x >= test_piece_x - (space_pixel_width/2) && x <= test_piece_x + space_pixel_width/2 
 		&& y >= test_piece_y - (space_pixel_width/2) && y <= test_piece_y + space_pixel_width/2 
@@ -771,7 +801,6 @@ void mouse(int button, int state, int x, int y) {
 		&& (test_piece_y - space_pixel_width/2) == 0
 		) {	
 		test_piece_x += space_pixel_width;
-		init();
 	}
 	else if (
 		(x >= test_piece_x - (space_pixel_width / 2)) && (x <= test_piece_x + (space_pixel_width / 2)) 	
@@ -780,7 +809,6 @@ void mouse(int button, int state, int x, int y) {
 		&& (test_piece_x + space_pixel_width/2) >= 15 * space_pixel_width
 		) {
 		test_piece_y += space_pixel_width;
-		init();
 	}
 	else if (
 		(x >= test_piece_x - (space_pixel_width / 2)) && (x <= test_piece_x + (space_pixel_width / 2))
@@ -788,14 +816,14 @@ void mouse(int button, int state, int x, int y) {
 		&& (test_piece_y + (space_pixel_width/2) >= 15 * space_pixel_width)
 		&& (test_piece_x -(space_pixel_width/2) > 0)
 		) {
-
 		test_piece_x -= space_pixel_width;
-		init();
 	}
 
-
-	if (x >= 740 && x <= 944 && y >= 240 && y <= 590) {
-		card drawn_card = draw_deck.draw_card();
+	//let user draw a card from the deck
+	//Author: Jay Brideau
+	if (x >= 740 && x <= 944 && y >= 240 && y <= 590
+		&& state == GLUT_DOWN) {
+		card drawn_card = draw_and_discard_card();
 		drawn_card.print_info();
 	}
 
