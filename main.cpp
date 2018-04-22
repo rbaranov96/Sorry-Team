@@ -1,8 +1,9 @@
+//local main
 #define _USE_MATH_DEFINES
 #include <cmath> 
 #include <iostream>
 #include <fstream>
-#include "game_board.h"
+#include <vector>
 #include "piece.h"
 #include "graphics.hpp"
 #include "card_deck.h"
@@ -25,6 +26,8 @@ void init() {
 	width = 1200;
 	height = 720;
 	mouse_x = mouse_y = 0;
+	draw_deck.fill_deck();
+	draw_deck.shuffle_deck();
 }
 
 /* Initialize OpenGL Graphics */
@@ -761,12 +764,40 @@ void kbd(unsigned char key, int x, int y) {
 
 //TEST CLICKABILITY
 void mouse(int button, int state, int x, int y) {
-	if (x >= test_piece_x - (space_pixel_width/2) && x <= test_piece_x + space_pixel_width/2 && y >= test_piece_y - (space_pixel_width/2)
-		&& y <= test_piece_y + space_pixel_width/2) {
+	if (
+		x >= test_piece_x - (space_pixel_width/2) && x <= test_piece_x + space_pixel_width/2 
+		&& y >= test_piece_y - (space_pixel_width/2) && y <= test_piece_y + space_pixel_width/2 
+		&& (test_piece_x + space_pixel_width / 2) < 15 * space_pixel_width 
+		&& (test_piece_y - space_pixel_width/2) == 0
+		) {	
 		test_piece_x += space_pixel_width;
 		init();
 	}
-	
+	else if (
+		(x >= test_piece_x - (space_pixel_width / 2)) && (x <= test_piece_x + (space_pixel_width / 2)) 	
+		&& (y >= test_piece_y - (space_pixel_width / 2)) && (y <= test_piece_y + (space_pixel_width / 2)) 
+		&& (test_piece_y + space_pixel_width / 2) < 15 * space_pixel_width 
+		&& (test_piece_x + space_pixel_width/2) >= 15 * space_pixel_width
+		) {
+		test_piece_y += space_pixel_width;
+		init();
+	}
+	else if (
+		(x >= test_piece_x - (space_pixel_width / 2)) && (x <= test_piece_x + (space_pixel_width / 2))
+		&& (y >= test_piece_y - (space_pixel_width / 2)) && (y <= test_piece_y + (space_pixel_width / 2))
+		&& (test_piece_y + (space_pixel_width/2) >= 15 * space_pixel_width)
+		&& (test_piece_x -(space_pixel_width/2) > 0)
+		) {
+
+		test_piece_x -= space_pixel_width;
+		init();
+	}
+
+
+	if (x >= 740 && x <= 944 && y >= 240 && y <= 590) {
+		card drawn_card = draw_deck.draw_card();
+		drawn_card.print_info();
+	}
 
 	glutPostRedisplay();
 }
