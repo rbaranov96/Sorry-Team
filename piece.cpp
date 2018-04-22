@@ -16,11 +16,11 @@ Piece::Piece(string c, int loc) {
 }
 
 Piece::~Piece() {
-
+    
 }
 string Piece::get_color() const {
     return color;
-
+    
 }
 
 int Piece::get_location() const {

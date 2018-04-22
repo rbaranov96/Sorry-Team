@@ -20,17 +20,17 @@ public:
     Piece();
     Piece(string c, int loc);
     ~Piece();
-
-
-
+    
+    
+    
     string get_color() const;
     int get_location() const;
-
+    
     void set_color(string c);
     void set_location(int loc);
-
+    
     void move(int delta_spaces);
-
+    
 };
 
 #endif //UNTITLED5_PIECE_H
