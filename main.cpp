@@ -11,23 +11,43 @@
 
 using namespace std;
 
+//initialize various global variables
 int width, height;
 int wd;
 card_deck discard_deck;
 card_deck draw_deck;
 int space_pixel_width = 45;
 
-int test_piece_x = (4 * space_pixel_width);
-int test_piece_y = 1 * space_pixel_width + (space_pixel_width / 2) + 10;
+//initialize x and y for all pieces
+//Author: Jay Brideau
+//initialize red x and y
+int red1_x = (4 * space_pixel_width);
+int red1_y = 1 * space_pixel_width + (space_pixel_width / 2) + 10;
+int red2_x = (5 * space_pixel_width);
+int red2_y = 1 * space_pixel_width + (space_pixel_width / 2) + 10;
+int red3_x = 4 * space_pixel_width;
+int red3_y = 2 * space_pixel_width + (space_pixel_width / 2) + 10;
+int red4_x = 5 * space_pixel_width;
+int red4_y = 2 * space_pixel_width + (space_pixel_width / 2) + 10;
+//initialize blue x and y
+int blue1_x, blue1_y, blue2_x, blue2_y, blue3_x, blue3_y, blue4_x, blue4_y;
+//initialize yellow x and y
+int yellow1_x, yellow1_y, yellow2_x, yellow2_y, yellow3_x, yellow3_y, yellow4_x, yellow4_y;
+//initialize green x and y
+int green1_x, green1_y, green2_x, green2_y, green3_x, green3_y, green4_x, green4_y;
 
 //GAME BOARD CLICKABILITY
 int mouse_x, mouse_y;
 
+//initialize text for the drawn card
 string card_face = "";
 string card_rules = "No card has been drawn yet.";
 
 //initialize pieces
-piece red1;
+piece red1, red2, red3, red4;
+piece blue1, blue2, blue3, blue4;
+piece yellow1, yellow2, yellow3, yellow4;
+piece green1, green2, green3, green4;
 
 //initialize variables
 //Author: Jay Brideau
@@ -41,7 +61,26 @@ void init() {
 	draw_deck.shuffle_deck();
 
 	//initialize pieces
-	red1 = piece({ 1,0,0 }, test_piece_x, test_piece_y);
+	//red pieces
+	red1 = piece({ 1,0,0 }, red1_x, red1_y);
+	red2 = piece({ 1,0,0 }, red2_x, red2_y);
+	red3 = piece({ 1,0,0 }, red3_x, red3_y);
+	red4 = piece({ 1,0,0 }, red4_x, red4_y);
+	//yellow pieces
+	yellow1 = piece({ 1,1,0 }, yellow1_x, yellow1_y);
+	yellow2 = piece({ 1,1,0 }, yellow2_x, yellow2_y);
+	yellow3 = piece({ 1,1,0 }, yellow3_x, yellow3_y);
+	yellow4 = piece({ 1,1,0 }, yellow4_x, yellow4_y);
+	//blue pieces
+	blue1 = piece({ 0,0,1 }, blue1_x, blue1_y);
+	blue2 = piece({ 0,0,1 }, blue2_x, blue2_y);
+	blue3 = piece({ 0,0,1 }, blue3_x, blue3_y);
+	blue4 = piece({ 0,0,1 }, blue4_x, blue4_y);
+	//green pieces
+	green1 = piece({ 0,1,0 }, green1_x, green1_y);
+	green2 = piece({ 0,1,0 }, green2_x, green2_y);
+	green3 = piece({ 0,1,0 }, green3_x, green3_y);
+	green4 = piece({ 0,1,0 }, green4_x, green4_y);
 
 }
 
@@ -873,7 +912,10 @@ void display() {
 	draw_gameboard();
 
 	//draw pieces
-	red1.draw();
+	red1.draw(red1_x, red1_y);
+	red2.draw(red2_x, red2_y);
+	red3.draw(red3_x, red3_y);
+	red4.draw(red4_x, red4_y);
 
 	glFlush();  // Render now
 }
@@ -891,30 +933,31 @@ void kbd(unsigned char key, int x, int y) {
 void mouse(int button, int state, int x, int y) {
 	//user can click on a test piece to move it around the board
 	//Author: Jay Brideau
-	/*if (
-		x >= test_piece_x - (space_pixel_width/2) && x <= test_piece_x + space_pixel_width/2 
-		&& y >= test_piece_y - (space_pixel_width/2) && y <= test_piece_y + space_pixel_width/2 
-		&& (test_piece_x + space_pixel_width / 2) < 15 * space_pixel_width 
-		&& (test_piece_y - space_pixel_width/2) == 0
+	if (
+		x >= red1_x - (space_pixel_width/2) && x <= red1_x + space_pixel_width/2 
+		&& y >= red1_y - (space_pixel_width/2) && y <= red1_y + space_pixel_width/2 
+		&& (red1_x + space_pixel_width / 2) < 15 * space_pixel_width 
+		&& (red1_y - space_pixel_width/2) == 0
 		) {	
-		test_piece_x += space_pixel_width;
+		cout << "hit piece top side!" << endl; 
+		red1_x += space_pixel_width;
 	}
 	else if (
-		(x >= test_piece_x - (space_pixel_width / 2)) && (x <= test_piece_x + (space_pixel_width / 2)) 	
-		&& (y >= test_piece_y - (space_pixel_width / 2)) && (y <= test_piece_y + (space_pixel_width / 2)) 
-		&& (test_piece_y + space_pixel_width / 2) < 15 * space_pixel_width 
-		&& (test_piece_x + space_pixel_width/2) >= 15 * space_pixel_width
+		(x >= red1_x - (space_pixel_width / 2)) && (x <= red1_x + (space_pixel_width / 2)) 	
+		&& (y >= red1_y - (space_pixel_width / 2)) && (y <= red1_y + (space_pixel_width / 2)) 
+		&& (red1_y + space_pixel_width / 2) < 15 * space_pixel_width 
+		&& (red1_x + space_pixel_width/2) >= 15 * space_pixel_width
 		) {
-		test_piece_y += space_pixel_width;
+		red1_y += space_pixel_width;
 	}
 	else if (
-		(x >= test_piece_x - (space_pixel_width / 2)) && (x <= test_piece_x + (space_pixel_width / 2))
-		&& (y >= test_piece_y - (space_pixel_width / 2)) && (y <= test_piece_y + (space_pixel_width / 2))
-		&& (test_piece_y + (space_pixel_width/2) >= 15 * space_pixel_width)
-		&& (test_piece_x -(space_pixel_width/2) > 0)
+		(x >= red1_x - (space_pixel_width / 2)) && (x <= red1_x + (space_pixel_width / 2))
+		&& (y >= red1_y - (space_pixel_width / 2)) && (y <= red1_y + (space_pixel_width / 2))
+		&& (red1_y + (space_pixel_width/2) >= 15 * space_pixel_width)
+		&& (red1_x -(space_pixel_width/2) > 0)
 		) {
-		test_piece_x -= space_pixel_width;
-	}*/
+		red1_x -= space_pixel_width;
+	}
 
 	//let user draw a card from the deck
 	//Author: Jay Brideau
