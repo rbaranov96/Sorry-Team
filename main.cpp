@@ -23,6 +23,7 @@ int test_piece_y = space_pixel_width / 2;
 //GAME BOARD CLICKABILITY
 int mouse_x, mouse_y;
 
+string card_face = "";
 string card_rules = "No card has been drawn yet.";
 
 //initialize variables
@@ -734,7 +735,7 @@ void draw_gameboard() {
 	//Discard deck
 	if (discard_deck.deck.size() != 0) {
 		glBegin(GL_QUADS);
-		glColor3f(0, 1, 0);
+		glColor3f(0.4, 0.4, 0.4);
 		glVertex2i(740, 20);
 		glVertex2i(1090, 20);
 		glVertex2i(1090, 220);
@@ -750,15 +751,20 @@ void draw_gameboard() {
 	
 	//Draw deck
 	glBegin(GL_QUADS);
-	glColor3f(0, 1, 1);
+	glColor3f(1, 1, 1);
 	glVertex2i(740, 240);
-	glVertex2i(940, 240);
-	glVertex2i(940, 590);
-	glVertex2i(740, 590);
+	glVertex2i(1090, 240);
+	glVertex2i(1090, 440);
+	glVertex2i(740, 440);
 	glEnd();
 	//draw card's rules
 	glColor3f(0, 0, 0);
 	glRasterPos2i(740, 270);
+	for (int i = 0; i < card_face.length(); ++i) {
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, card_face[i]);
+	}
+	glColor3f(0, 0, 0);
+	glRasterPos2i(740, 300);
 	for (int i = 0; i < card_rules.length(); ++i) {
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, card_rules[i]);
 	}
@@ -837,9 +843,10 @@ void mouse(int button, int state, int x, int y) {
 
 	//let user draw a card from the deck
 	//Author: Jay Brideau
-	if (x >= 740 && x <= 944 && y >= 240 && y <= 590
+	if (x >= 740 && x <= 1090 && y >= 240 && y <= 440
 		&& state == GLUT_DOWN) {
 		card drawn_card = draw_and_discard_card();
+		card_face = drawn_card.get_face();
 		card_rules = drawn_card.human_rules;
 		drawn_card.print_info();
 	}
