@@ -17,14 +17,17 @@ card_deck discard_deck;
 card_deck draw_deck;
 int space_pixel_width = 45;
 
-int test_piece_x = (4 * space_pixel_width + (space_pixel_width/2));
-int test_piece_y = space_pixel_width / 2;
+int test_piece_x = (4 * space_pixel_width);
+int test_piece_y = 1 * space_pixel_width + (space_pixel_width / 2) + 10;
 
 //GAME BOARD CLICKABILITY
 int mouse_x, mouse_y;
 
 string card_face = "";
 string card_rules = "No card has been drawn yet.";
+
+//initialize pieces
+piece red1;
 
 //initialize variables
 //Author: Jay Brideau
@@ -36,6 +39,10 @@ void init() {
 	mouse_x = mouse_y = 0;
 	draw_deck.fill_deck();
 	draw_deck.shuffle_deck();
+
+	//initialize pieces
+	red1 = piece({ 1,0,0 }, test_piece_x, test_piece_y);
+
 }
 
 /* Initialize OpenGL Graphics */
@@ -729,6 +736,80 @@ void draw_gameboard() {
 	glVertex2i((6 * space_pixel_width), (14 * space_pixel_width));
 	glVertex2i((5 * space_pixel_width), (14 * space_pixel_width));
 	glEnd();
+	//draw home and start spaces
+	//Red home
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3f(1, 0.4, 0.4);
+	glVertex2i(2 * space_pixel_width + (space_pixel_width/2), 6 * space_pixel_width + 55);
+	for (int i = 0; i <= 360; ++i) {
+		glVertex2i(2 * space_pixel_width + (space_pixel_width / 2) + 55 * cos(i * M_PI / 180.0),
+			6 * space_pixel_width + 55 + 55 * sin(i * M_PI / 180.0));
+	}
+	glEnd();
+	//red start
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3f(1, 0.4, 0.4);
+	glVertex2i(4 * space_pixel_width + (space_pixel_width / 2), space_pixel_width + 55);
+	for (int i = 0; i <= 360; ++i) {
+		glVertex2i(4 * space_pixel_width + (space_pixel_width / 2) + 55 * cos(i * M_PI / 180.0),
+			55 + space_pixel_width + 55 * sin(i * M_PI / 180.0));
+	}
+	glEnd();
+	//blue home
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3f(0.4, 0.4, 1);
+	glVertex2i(10 * space_pixel_width + (space_pixel_width / 2) - 55, 2 * space_pixel_width + (space_pixel_width/2));
+	for (int i = 0; i <= 360; ++i) {
+		glVertex2i(10 * space_pixel_width - 55 + 55 * cos(i * M_PI / 180.0),
+			2 * space_pixel_width + (space_pixel_width / 2) + 55 * sin(i * M_PI / 180.0));
+	}
+	glEnd();
+	//blue start
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3f(0.4, 0.4, 1);
+	glVertex2i(15 * space_pixel_width + (space_pixel_width / 2) - 55, 4 * space_pixel_width + (space_pixel_width / 2));
+	for (int i = 0; i <= 360; ++i) {
+		glVertex2i(15 * space_pixel_width - 55 + 55 * cos(i * M_PI / 180.0),
+			4 * space_pixel_width + (space_pixel_width / 2) + 55 * sin(i * M_PI / 180.0));
+	}
+	glEnd();
+	//yellow home
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3f(1, 1, 0.4);
+	glVertex2i(13 * space_pixel_width + (space_pixel_width / 2), 10 * space_pixel_width - 55);
+	for (int i = 0; i <= 360; ++i) {
+		glVertex2i(13 * space_pixel_width + (space_pixel_width / 2) + 55 * cos(i * M_PI / 180.0),
+			10 * space_pixel_width - 55 + 55 * sin(i * M_PI / 180.0));
+	}
+	glEnd();
+	//yellow start
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3f(1, 1, 0.4);
+	glVertex2i(11 * space_pixel_width + (space_pixel_width / 2), 15 * space_pixel_width - 55);
+	for (int i = 0; i <= 360; ++i) {
+		glVertex2i(11 * space_pixel_width + (space_pixel_width / 2) + 55 * cos(i * M_PI / 180.0),
+			15 * space_pixel_width - 55 + 55 * sin(i * M_PI / 180.0));
+	}
+	glEnd();
+	//green home
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3f(0.4, 1, 0.4);
+	glVertex2i(6 * space_pixel_width + (space_pixel_width / 2) + 55, 13 * space_pixel_width + (space_pixel_width / 2));
+	for (int i = 0; i <= 360; ++i) {
+		glVertex2i(6 * space_pixel_width + 55 + 55 * cos(i * M_PI / 180.0),
+			13 * space_pixel_width + (space_pixel_width / 2) + 55 * sin(i * M_PI / 180.0));
+	}
+	glEnd();
+	//green start
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3f(0.4, 1, 0.4);
+	glVertex2i(1 * space_pixel_width + (space_pixel_width / 2) + 55, 11 * space_pixel_width + (space_pixel_width / 2));
+	for (int i = 0; i <= 360; ++i) {
+		glVertex2i(1 * space_pixel_width + 55 + 55 * cos(i * M_PI / 180.0),
+			11 * space_pixel_width + (space_pixel_width / 2) + 55 * sin(i * M_PI / 180.0));
+	}
+	glEnd();
+
 
 	//draw the card decks
 	//Author: Jay Brideau
@@ -769,15 +850,6 @@ void draw_gameboard() {
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, card_rules[i]);
 	}
 
-	//test circle
-	glBegin(GL_TRIANGLE_FAN);
-	glColor3f(1, 0, 0);
-	glVertex2i(test_piece_x, test_piece_y);
-	for (int i = 0; i <= 360; ++i) {
-		glVertex2i( test_piece_x + 20 * cos(i * M_PI / 180.0),
-			test_piece_y + 20 * sin(i * M_PI / 180.0));
-	}
-	glEnd();
 }
 
 /* Handler for window-repaint event. Call back when the window first appears and
@@ -800,6 +872,9 @@ void display() {
 	//draw the game board gui
 	draw_gameboard();
 
+	//draw pieces
+	red1.draw();
+
 	glFlush();  // Render now
 }
 
@@ -816,7 +891,7 @@ void kbd(unsigned char key, int x, int y) {
 void mouse(int button, int state, int x, int y) {
 	//user can click on a test piece to move it around the board
 	//Author: Jay Brideau
-	if (
+	/*if (
 		x >= test_piece_x - (space_pixel_width/2) && x <= test_piece_x + space_pixel_width/2 
 		&& y >= test_piece_y - (space_pixel_width/2) && y <= test_piece_y + space_pixel_width/2 
 		&& (test_piece_x + space_pixel_width / 2) < 15 * space_pixel_width 
@@ -839,7 +914,7 @@ void mouse(int button, int state, int x, int y) {
 		&& (test_piece_x -(space_pixel_width/2) > 0)
 		) {
 		test_piece_x -= space_pixel_width;
-	}
+	}*/
 
 	//let user draw a card from the deck
 	//Author: Jay Brideau
