@@ -19,10 +19,65 @@ int subwd;
 
 string gameinfor[] = {"player","no","no","no"};
 
-bool red = false;
-bool yellow = false;
-bool green = false;
-bool blue = false;
+
+// player choose color
+float changecolor1 = 1;
+float changecolor2 = 0.3;
+float changecolor3 = 0.35;
+
+// computer1 level
+float computer1lv11 = 1;
+float computer1lv12 = 0.3;
+float computer1lv13 = 0.35;
+
+float computer1lv21 = 1;
+float computer1lv22 = 0.3;
+float computer1lv23 = 0.35;
+
+float computer1lv31 = 1;
+float computer1lv32 = 0.3;
+float computer1lv33 = 0.35;
+
+float computer1lv41 = 1;
+float computer1lv42 = 0.3;
+float computer1lv43 = 0.35;
+
+// computer2 level
+float computer2lv11 = 1;
+float computer2lv12 = 0.3;
+float computer2lv13 = 0.35;
+
+float computer2lv21 = 1;
+float computer2lv22 = 0.3;
+float computer2lv23 = 0.35;
+
+float computer2lv31 = 1;
+float computer2lv32 = 0.3;
+float computer2lv33 = 0.35;
+
+float computer2lv41 = 1;
+float computer2lv42 = 0.3;
+float computer2lv43 = 0.35;
+
+
+// computer2 level
+float computer3lv11 = 1;
+float computer3lv12 = 0.3;
+float computer3lv13 = 0.35;
+
+float computer3lv21 = 1;
+float computer3lv22 = 0.3;
+float computer3lv23 = 0.35;
+
+float computer3lv31 = 1;
+float computer3lv32 = 0.3;
+float computer3lv33 = 0.35;
+
+float computer3lv41 = 1;
+float computer3lv42 = 0.3;
+float computer3lv43 = 0.35;
+
+
 
 
 void init() {
@@ -110,7 +165,7 @@ void display() {
     }
     
     glBegin(GL_TRIANGLE_FAN);
-    glColor3f(1, .3, .35);
+    glColor3f(computer2lv11,computer2lv12,computer2lv13);
     glVertex2i(300 , 325);
     for (int i = 0; i <= 360; ++i) {
         glVertex2i( 300 + 20 * cos(i * M_PI / 180.0),
@@ -125,7 +180,7 @@ void display() {
     }
     
     glBegin(GL_TRIANGLE_FAN);
-    glColor3f(1, .3, .35);
+    glColor3f(computer2lv21,computer2lv22,computer2lv23);
     glVertex2i(350 , 325);
     for (int i = 0; i <= 360; ++i) {
         glVertex2i( 350 + 20 * cos(i * M_PI / 180.0),
@@ -140,7 +195,7 @@ void display() {
     }
     
     glBegin(GL_TRIANGLE_FAN);
-    glColor3f(1, .3, .35);
+    glColor3f(computer2lv31,computer2lv32,computer2lv33);
     glVertex2i(400 , 325);
     for (int i = 0; i <= 360; ++i) {
         glVertex2i( 400 + 20 * cos(i * M_PI / 180.0),
@@ -155,7 +210,7 @@ void display() {
     }
     
     glBegin(GL_TRIANGLE_FAN);
-    glColor3f(1, .3, .35);
+    glColor3f(computer2lv41,computer2lv42,computer2lv43);
     glVertex2i(450 , 325);
     for (int i = 0; i <= 360; ++i) {
         glVertex2i( 450 + 20 * cos(i * M_PI / 180.0),
@@ -187,7 +242,7 @@ void display() {
     }
     
     glBegin(GL_TRIANGLE_FAN);
-    glColor3f(1, .3, .35);
+    glColor3f(computer3lv11,computer3lv12,computer3lv13);
     glVertex2i(300 , 425);
     for (int i = 0; i <= 360; ++i) {
         glVertex2i( 300 + 20 * cos(i * M_PI / 180.0),
@@ -202,7 +257,7 @@ void display() {
     }
     
     glBegin(GL_TRIANGLE_FAN);
-    glColor3f(1, .3, .35);
+    glColor3f(computer3lv21,computer3lv22,computer3lv23);
     glVertex2i(350 , 425);
     for (int i = 0; i <= 360; ++i) {
         glVertex2i( 350 + 20 * cos(i * M_PI / 180.0),
@@ -217,7 +272,7 @@ void display() {
     }
     
     glBegin(GL_TRIANGLE_FAN);
-    glColor3f(1, .3, .35);
+    glColor3f(computer3lv31,computer3lv32,computer3lv33);
     glVertex2i(400 , 425);
     for (int i = 0; i <= 360; ++i) {
         glVertex2i( 400 + 20 * cos(i * M_PI / 180.0),
@@ -232,7 +287,7 @@ void display() {
     }
     
     glBegin(GL_TRIANGLE_FAN);
-    glColor3f(1, .3, .35);
+    glColor3f(computer3lv41,computer3lv42,computer3lv43);
     glVertex2i(450 , 425);
     for (int i = 0; i <= 360; ++i) {
         glVertex2i( 450 + 20 * cos(i * M_PI / 180.0),
@@ -264,7 +319,7 @@ void display() {
     }
     
     glBegin(GL_TRIANGLE_FAN);
-    glColor3f(1, .3, .35);
+    glColor3f(computer1lv11,computer1lv12,computer1lv13);
     glVertex2i(300 , 225);
     for (int i = 0; i <= 360; ++i) {
         glVertex2i( 300 + 20 * cos(i * M_PI / 180.0),
@@ -279,7 +334,7 @@ void display() {
     }
     
     glBegin(GL_TRIANGLE_FAN);
-    glColor3f(1, .3, .35);
+    glColor3f(computer1lv21,computer1lv22,computer1lv23);
     glVertex2i(350 , 225);
     for (int i = 0; i <= 360; ++i) {
         glVertex2i( 350 + 20 * cos(i * M_PI / 180.0),
@@ -294,7 +349,7 @@ void display() {
     }
     
     glBegin(GL_TRIANGLE_FAN);
-    glColor3f(1, .3, .35);
+    glColor3f(computer1lv31,computer1lv32,computer1lv33);
     glVertex2i(400 , 225);
     for (int i = 0; i <= 360; ++i) {
         glVertex2i( 400 + 20 * cos(i * M_PI / 180.0),
@@ -309,7 +364,7 @@ void display() {
     }
     
     glBegin(GL_TRIANGLE_FAN);
-    glColor3f(1, .3, .35);
+    glColor3f(computer1lv41,computer1lv42,computer1lv43);
     glVertex2i(450 , 225);
     for (int i = 0; i <= 360; ++i) {
         glVertex2i( 450 + 20 * cos(i * M_PI / 180.0),
@@ -327,16 +382,7 @@ void display() {
     
     
     glBegin(GL_QUADS);
-    glColor3f(1, .3, .35);
-//    if (red){
-//        glColor3f(1, 0, 0);
-//    }else if (yellow){
-//        glColor3f(1, 1, 0);
-//    }else if (green){
-//        glColor3f(0, 1, 0);
-//    }else if (blue){
-//        glColor3f(0, 0, 1);
-//    }
+    glColor3f(changecolor1,changecolor2,changecolor3);
     glVertex2i(150, 100);
     glVertex2i(250, 100);
     glVertex2i(250, 150);
@@ -575,7 +621,9 @@ void mouse(int button, int state, int x, int y) {
         && y <= 140){
         
         gameinfor[0] = "red";
-        red = true;
+        changecolor1 = 1;
+        changecolor2 = 0;
+        changecolor3 = 0;
         
     }
     
@@ -583,7 +631,9 @@ void mouse(int button, int state, int x, int y) {
         && y <= 140){
         
         gameinfor[0] = "yellow";
-        yellow = true;
+        changecolor1 = 1;
+        changecolor2 = 1;
+        changecolor3 = 0;
 
     }
     
@@ -591,7 +641,9 @@ void mouse(int button, int state, int x, int y) {
         && y <= 140){
         
         gameinfor[0] = "green";
-        green = true;
+        changecolor1 = 0;
+        changecolor2 = 1;
+        changecolor3 = 0;
         
     }
     
@@ -599,7 +651,9 @@ void mouse(int button, int state, int x, int y) {
         && y <= 140){
         
         gameinfor[0] = "blue";
-        blue = true;
+        changecolor1 = 0;
+        changecolor2 = 0;
+        changecolor3 = 1;
         
     }
     
@@ -607,6 +661,22 @@ void mouse(int button, int state, int x, int y) {
         && y <= 240){
         
         gameinfor[1] = "lv1";
+        computer1lv11 = 1;
+        computer1lv12 = 0;
+        computer1lv13 = 0;
+        
+        computer1lv21 = 1;
+        computer1lv22 = 0.3;
+        computer1lv23 = 0.35;
+        
+        computer1lv31 = 1;
+        computer1lv32 = 0.3;
+        computer1lv33 = 0.35;
+        
+        computer1lv41 = 1;
+        computer1lv42 = 0.3;
+        computer1lv43 = 0.35;
+        
         
     }
     
@@ -614,6 +684,21 @@ void mouse(int button, int state, int x, int y) {
         && y <= 240){
         
         gameinfor[1] = "lv2";
+        computer1lv11 = 1;
+        computer1lv12 = 0.3;
+        computer1lv13 = 0.35;
+        
+        computer1lv21 = 1;
+        computer1lv22 = 0;
+        computer1lv23 = 0;
+        
+        computer1lv31 = 1;
+        computer1lv32 = 0.3;
+        computer1lv33 = 0.35;
+        
+        computer1lv41 = 1;
+        computer1lv42 = 0.3;
+        computer1lv43 = 0.35;
         
     }
     
@@ -621,6 +706,21 @@ void mouse(int button, int state, int x, int y) {
         && y <= 240){
         
         gameinfor[1] = "lv3";
+        computer1lv11 = 1;
+        computer1lv12 = 0.3;
+        computer1lv13 = 0.35;
+        
+        computer1lv21 = 1;
+        computer1lv22 = 0.3;
+        computer1lv23 = 0.35;
+        
+        computer1lv31 = 1;
+        computer1lv32 = 0;
+        computer1lv33 = 0;
+        
+        computer1lv41 = 1;
+        computer1lv42 = 0.3;
+        computer1lv43 = 0.35;
         
     }
     
@@ -628,13 +728,42 @@ void mouse(int button, int state, int x, int y) {
         && y <= 240){
         
         gameinfor[1] = "lv4";
+        computer1lv11 = 1;
+        computer1lv12 = 0.3;
+        computer1lv13 = 0.35;
         
+        computer1lv21 = 1;
+        computer1lv22 = 0.3;
+        computer1lv23 = 0.35;
+        
+        computer1lv31 = 1;
+        computer1lv32 = 0.3;
+        computer1lv33 = 0.35;
+        
+        computer1lv41 = 1;
+        computer1lv42 = 0;
+        computer1lv43 = 0;
     }
     
     if (x >= 285 && x <= 315 && y >= 310
         && y <= 340){
         
         gameinfor[2] = "lv1";
+        computer2lv11 = 1;
+        computer2lv12 = 0;
+        computer2lv13 = 0;
+        
+        computer2lv21 = 1;
+        computer2lv22 = 0.3;
+        computer2lv23 = 0.35;
+        
+        computer2lv31 = 1;
+        computer2lv32 = 0.3;
+        computer2lv33 = 0.35;
+        
+        computer2lv41 = 1;
+        computer2lv42 = 0.3;
+        computer2lv43 = 0.35;
         
     }
     
@@ -642,6 +771,21 @@ void mouse(int button, int state, int x, int y) {
         && y <= 340){
         
         gameinfor[2] = "lv2";
+        computer2lv11 = 1;
+        computer2lv12 = 0.3;
+        computer2lv13 = 0.35;
+        
+        computer2lv21 = 1;
+        computer2lv22 = 0;
+        computer2lv23 = 0;
+        
+        computer2lv31 = 1;
+        computer2lv32 = 0.3;
+        computer2lv33 = 0.35;
+        
+        computer2lv41 = 1;
+        computer2lv42 = 0.3;
+        computer2lv43 = 0.35;
         
     }
     
@@ -649,6 +793,21 @@ void mouse(int button, int state, int x, int y) {
         && y <= 340){
         
         gameinfor[2] = "lv3";
+        computer2lv11 = 1;
+        computer2lv12 = 0.3;
+        computer2lv13 = 0.35;
+        
+        computer2lv21 = 1;
+        computer2lv22 = 0.3;
+        computer2lv23 = 0.35;
+        
+        computer2lv31 = 1;
+        computer2lv32 = 0;
+        computer2lv33 = 0;
+        
+        computer2lv41 = 1;
+        computer2lv42 = 0.3;
+        computer2lv43 = 0.35;
         
     }
     
@@ -656,6 +815,21 @@ void mouse(int button, int state, int x, int y) {
         && y <= 340){
         
         gameinfor[2] = "lv4";
+        computer2lv11 = 1;
+        computer2lv12 = 0.3;
+        computer2lv13 = 0.35;
+        
+        computer2lv21 = 1;
+        computer2lv22 = 0.3;
+        computer2lv23 = 0.35;
+        
+        computer2lv31 = 1;
+        computer2lv32 = 0.3;
+        computer2lv33 = 0.35;
+        
+        computer2lv41 = 1;
+        computer2lv42 = 0;
+        computer2lv43 = 0;
         
     }
     
@@ -663,6 +837,21 @@ void mouse(int button, int state, int x, int y) {
         && y <= 440){
         
         gameinfor[3] = "lv1";
+        computer3lv11 = 1;
+        computer3lv12 = 0;
+        computer3lv13 = 0;
+        
+        computer3lv21 = 1;
+        computer3lv22 = 0.3;
+        computer3lv23 = 0.35;
+        
+        computer3lv31 = 1;
+        computer3lv32 = 0.3;
+        computer3lv33 = 0.35;
+        
+        computer3lv41 = 1;
+        computer3lv42 = 0.3;
+        computer3lv43 = 0.35;
         
     }
     
@@ -670,13 +859,42 @@ void mouse(int button, int state, int x, int y) {
         && y <= 440){
         
         gameinfor[3] = "lv2";
+        computer3lv11 = 1;
+        computer3lv12 = 0.3;
+        computer3lv13 = 0.35;
         
+        computer3lv21 = 1;
+        computer3lv22 = 0;
+        computer3lv23 = 0;
+        
+        computer3lv31 = 1;
+        computer3lv32 = 0.3;
+        computer3lv33 = 0.35;
+        
+        computer3lv41 = 1;
+        computer3lv42 = 0.3;
+        computer3lv43 = 0.35;
     }
     
     if (x >= 385 && x <= 415 && y >= 410
         && y <= 440){
         
         gameinfor[3] = "lv3";
+        computer3lv11 = 1;
+        computer3lv12 = 0.3;
+        computer3lv13 = 0.35;
+        
+        computer3lv21 = 1;
+        computer3lv22 = 0.3;
+        computer3lv23 = 0.35;
+        
+        computer3lv31 = 1;
+        computer3lv32 = 0;
+        computer3lv33 = 0;
+        
+        computer3lv41 = 1;
+        computer3lv42 = 0.3;
+        computer3lv43 = 0.35;
         
     }
     
@@ -684,7 +902,21 @@ void mouse(int button, int state, int x, int y) {
         && y <= 440){
         
         gameinfor[3] = "lv4";
+        computer3lv11 = 1;
+        computer3lv12 = 0.3;
+        computer3lv13 = 0.35;
         
+        computer3lv21 = 1;
+        computer3lv22 = 0.3;
+        computer3lv23 = 0.35;
+        
+        computer3lv31 = 1;
+        computer3lv32 = 0.3;
+        computer3lv33 = 0.35;
+        
+        computer3lv41 = 1;
+        computer3lv42 = 0;
+        computer3lv43 = 0;
     }
     
     
