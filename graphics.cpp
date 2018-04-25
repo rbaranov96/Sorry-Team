@@ -9,6 +9,7 @@
 #include "piece.h"
 #include "graphics.hpp"
 #include "card_deck.h"
+
 using namespace std;
 
 //initialize various global variables
@@ -16,6 +17,7 @@ int width, height;
 int wd;
 card_deck discard_deck;
 card_deck draw_deck;
+
 int space_pixel_width = 45;
 
 //initialize x and y for all pieces
@@ -971,15 +973,7 @@ void mouse(int button, int state, int x, int y) {
 	//user can click on a test piece to move it around the board
 	//Author: Jay Brideau
 	if (
-		x >= red1_x - (space_pixel_width/2) && x <= red1_x + space_pixel_width/2 
-		&& y >= red1_y - (space_pixel_width/2) && y <= red1_y + space_pixel_width/2 
-		&& (red1_x + space_pixel_width / 2) < 15 * space_pixel_width 
-		&& (red1_y - space_pixel_width/2) == 0
-		) {	
-		cout << "hit piece top side!" << endl; 
-		red1_x += space_pixel_width;
-	}
-	else if (
+
 		(x >= red1_x - (space_pixel_width / 2)) && (x <= red1_x + (space_pixel_width / 2)) 	
 		&& (y >= red1_y - (space_pixel_width / 2)) && (y <= red1_y + (space_pixel_width / 2)) 
 		&& (red1_y + space_pixel_width / 2) < 15 * space_pixel_width 
@@ -994,16 +988,11 @@ void mouse(int button, int state, int x, int y) {
 		&& (red1_x -(space_pixel_width/2) > 0)
 		) {
 		red1_x -= space_pixel_width;
-	}
 
 	//let user draw a card from the deck
 	//Author: Jay Brideau
 	if (x >= 740 && x <= 1090 && y >= 240 && y <= 440
 		&& state == GLUT_DOWN) {
-		card drawn_card = draw_and_discard_card();
-		card_face = drawn_card.get_face();
-		card_rules = drawn_card.human_rules;
-		drawn_card.print_info();
 	}
 
 	glutPostRedisplay();
@@ -1015,7 +1004,6 @@ void timer(int extra) {
 	glutTimerFunc(60, timer, 0);
 	glutPostRedisplay();
 }
-
 
 int graphicsPlay(int argc, char** argv) {
 
