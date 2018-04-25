@@ -19,5 +19,6 @@ public:
 	string human_rules;
 	//print out card's information
 	void print_info();
-
+	//return face with corrections
+	string get_face();
 };

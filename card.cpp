@@ -22,7 +22,7 @@ card::card(cardface face_given) {
 		human_rules = "Move one pawn forward 5 spaces.";
 		break;
 	case seven:
-		human_rules = "Either move one pawn forward 7 spaces OR split the forawrd move between any two pawns. You may not use this to start a pawn.";
+		human_rules = "Either move one pawn forward 7 spaces OR split the forward move between any two pawns. You may not use this to start a pawn.";
 		break;
 	case eight:
 		human_rules = "Move one pawn forward 8 spaces.";
@@ -52,4 +52,14 @@ void card::print_info() {
 		cout << face << endl;
 	}
 	cout << human_rules << endl;
+}
+
+//return card's face, with corrections
+string card::get_face() {
+	if (face == 13) {
+		return "Sorry!";
+	}
+	else {
+		return to_string(face);
+	}
 }

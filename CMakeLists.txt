@@ -3,5 +3,5 @@ project(Sorry_Team)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(SOURCE_FILES main.cpp space.h piece.cpp piece.h game_board.cpp game_board.h)
+set(SOURCE_FILES main.cpp piece.cpp piece.h)
 add_executable(untitled5 ${SOURCE_FILES})

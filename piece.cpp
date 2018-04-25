@@ -137,4 +137,15 @@ void piece::draw() const {
 	glEnd();
 
 }
+//draw a piece that can move
+//Author: Jay Brideau
+void piece::draw(double x, double y) {
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3f(fill.red, fill.green, fill.blue);
+	glVertex2i(x, y);
+	for (double i = 0; i <= 2.0*M_PI + 0.05; i += 2.0*M_PI / 360.0) {
+		glVertex2i(x + radius*cos(i), y + radius*sin(i));
+	}
+	glEnd();
+}
 
