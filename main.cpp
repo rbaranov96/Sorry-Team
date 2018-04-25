@@ -30,11 +30,32 @@ int red3_y = 2 * space_pixel_width + (space_pixel_width / 2) + 10;
 int red4_x = 5 * space_pixel_width;
 int red4_y = 2 * space_pixel_width + (space_pixel_width / 2) + 10;
 //initialize blue x and y
-int blue1_x, blue1_y, blue2_x, blue2_y, blue3_x, blue3_y, blue4_x, blue4_y;
+int blue1_x = 13 * space_pixel_width + 10; 
+int blue1_y = 4 * space_pixel_width; 
+int blue2_x = 14 * space_pixel_width + 10; 
+int blue2_y = 4 * space_pixel_width; 
+int blue3_x = 13 * space_pixel_width + 10; 
+int blue3_y = 5 * space_pixel_width; 
+int blue4_x = 14 * space_pixel_width + 10; 
+int blue4_y = 5 * space_pixel_width;
 //initialize yellow x and y
-int yellow1_x, yellow1_y, yellow2_x, yellow2_y, yellow3_x, yellow3_y, yellow4_x, yellow4_y;
+int yellow1_x = 11 * space_pixel_width;
+int yellow1_y = 13 * space_pixel_width + 10;
+int yellow2_x = 12 * space_pixel_width;
+int yellow2_y = 13 * space_pixel_width + 10;
+int yellow3_x = 11 * space_pixel_width;
+int yellow3_y = 14 * space_pixel_width + 10;
+int yellow4_x = 12 * space_pixel_width;
+int yellow4_y = 14 * space_pixel_width + 10;
 //initialize green x and y
-int green1_x, green1_y, green2_x, green2_y, green3_x, green3_y, green4_x, green4_y;
+int green1_x = 2 * space_pixel_width - 10;
+int green1_y = 11 * space_pixel_width;
+int green2_x = 3 * space_pixel_width - 10;
+int green2_y = 11 * space_pixel_width;
+int green3_x = 2 * space_pixel_width - 10;
+int green3_y = 12 * space_pixel_width;
+int green4_x = 3 * space_pixel_width - 10;
+int green4_y = 12 * space_pixel_width;
 
 //GAME BOARD CLICKABILITY
 int mouse_x, mouse_y;
@@ -66,16 +87,16 @@ void init() {
 	red2 = piece({ 1,0,0 }, red2_x, red2_y);
 	red3 = piece({ 1,0,0 }, red3_x, red3_y);
 	red4 = piece({ 1,0,0 }, red4_x, red4_y);
-	//yellow pieces
-	yellow1 = piece({ 1,1,0 }, yellow1_x, yellow1_y);
-	yellow2 = piece({ 1,1,0 }, yellow2_x, yellow2_y);
-	yellow3 = piece({ 1,1,0 }, yellow3_x, yellow3_y);
-	yellow4 = piece({ 1,1,0 }, yellow4_x, yellow4_y);
 	//blue pieces
 	blue1 = piece({ 0,0,1 }, blue1_x, blue1_y);
 	blue2 = piece({ 0,0,1 }, blue2_x, blue2_y);
 	blue3 = piece({ 0,0,1 }, blue3_x, blue3_y);
 	blue4 = piece({ 0,0,1 }, blue4_x, blue4_y);
+	//yellow pieces
+	yellow1 = piece({ 1,1,0 }, yellow1_x, yellow1_y);
+	yellow2 = piece({ 1,1,0 }, yellow2_x, yellow2_y);
+	yellow3 = piece({ 1,1,0 }, yellow3_x, yellow3_y);
+	yellow4 = piece({ 1,1,0 }, yellow4_x, yellow4_y);
 	//green pieces
 	green1 = piece({ 0,1,0 }, green1_x, green1_y);
 	green2 = piece({ 0,1,0 }, green2_x, green2_y);
@@ -814,7 +835,7 @@ void draw_gameboard() {
 	glEnd();
 	//yellow home
 	glBegin(GL_TRIANGLE_FAN);
-	glColor3f(1, 1, 0.4);
+	glColor3f(1, 1, 0.5);
 	glVertex2i(13 * space_pixel_width + (space_pixel_width / 2), 10 * space_pixel_width - 55);
 	for (int i = 0; i <= 360; ++i) {
 		glVertex2i(13 * space_pixel_width + (space_pixel_width / 2) + 55 * cos(i * M_PI / 180.0),
@@ -823,7 +844,7 @@ void draw_gameboard() {
 	glEnd();
 	//yellow start
 	glBegin(GL_TRIANGLE_FAN);
-	glColor3f(1, 1, 0.4);
+	glColor3f(1, 1, 0.5);
 	glVertex2i(11 * space_pixel_width + (space_pixel_width / 2), 15 * space_pixel_width - 55);
 	for (int i = 0; i <= 360; ++i) {
 		glVertex2i(11 * space_pixel_width + (space_pixel_width / 2) + 55 * cos(i * M_PI / 180.0),
@@ -912,10 +933,26 @@ void display() {
 	draw_gameboard();
 
 	//draw pieces
+	//draw red pieces
 	red1.draw(red1_x, red1_y);
 	red2.draw(red2_x, red2_y);
 	red3.draw(red3_x, red3_y);
 	red4.draw(red4_x, red4_y);
+	//draw blue pieces
+	blue1.draw(blue1_x, blue1_y);
+	blue2.draw(blue2_x, blue2_y);
+	blue3.draw(blue3_x, blue3_y);
+	blue4.draw(blue4_x, blue4_y);
+	//draw yellow pieces
+	yellow1.draw(yellow1_x, yellow1_y);
+	yellow2.draw(yellow2_x, yellow2_y);
+	yellow3.draw(yellow3_x, yellow3_y);
+	yellow4.draw(yellow4_x, yellow4_y);
+	//draw green pieces
+	green1.draw(green1_x, green1_y);
+	green2.draw(green2_x, green2_y);
+	green3.draw(green3_x, green3_y);
+	green4.draw(green4_x, green4_y);
 
 	glFlush();  // Render now
 }
