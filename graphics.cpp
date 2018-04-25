@@ -9,7 +9,6 @@
 #include "piece.h"
 #include "graphics.hpp"
 #include "card_deck.h"
-#include "card.h"
 
 using namespace std;
 
@@ -18,7 +17,7 @@ int width, height;
 int wd;
 card_deck discard_deck;
 card_deck draw_deck;
-card drawn_card = card(one);
+
 int space_pixel_width = 45;
 
 //initialize x and y for all pieces
@@ -968,40 +967,13 @@ void kbd(unsigned char key, int x, int y) {
 	return;
 }
 
-//move method
-void move_piece(int &x, int &y, piece p, card c) {
-	if (c.startable) {
-		if (p.get_fill().red == 1 && p.get_fill().green == 0) {
-			x = 4 * space_pixel_width + (space_pixel_width / 2);
-			y = space_pixel_width / 2;
-		}
-	}
-	glutPostRedisplay();
-}
-
 //allow user to click things
 //Author: Jay Brideau
 void mouse(int button, int state, int x, int y) {
 	//user can click on a test piece to move it around the board
 	//Author: Jay Brideau
 	if (
-		//piece red1
-		x >= red1_x - (space_pixel_width/2) && x <= red1_x + space_pixel_width/2 
-		&& y >= red1_y - (space_pixel_width/2) && y <= red1_y + space_pixel_width/2 
-		&& state == GLUT_DOWN
-		) {	
-		move_piece(red1_x, red1_y, red1, drawn_card);
-	}
-	else if (
-		//piece red2
-		x >= red2_x - (space_pixel_width / 2) && x <= red2_x + space_pixel_width / 2
-		&& y >= red2_y - (space_pixel_width / 2) && y <= red2_y + space_pixel_width / 2
-		&& state == GLUT_DOWN
-		) {
-		move_piece(red2_x, red2_y, red2, drawn_card);
-	}
-	
-	/*else if (
+
 		(x >= red1_x - (space_pixel_width / 2)) && (x <= red1_x + (space_pixel_width / 2)) 	
 		&& (y >= red1_y - (space_pixel_width / 2)) && (y <= red1_y + (space_pixel_width / 2)) 
 		&& (red1_y + space_pixel_width / 2) < 15 * space_pixel_width 
@@ -1016,15 +988,11 @@ void mouse(int button, int state, int x, int y) {
 		&& (red1_x -(space_pixel_width/2) > 0)
 		) {
 		red1_x -= space_pixel_width;
-	}*/
 
 	//let user draw a card from the deck
 	//Author: Jay Brideau
 	if (x >= 740 && x <= 1090 && y >= 240 && y <= 440
 		&& state == GLUT_DOWN) {
-		drawn_card = draw_and_discard_card();
-		card_face = drawn_card.get_face();
-		card_rules = drawn_card.human_rules;
 	}
 
 	glutPostRedisplay();
@@ -1036,8 +1004,6 @@ void timer(int extra) {
 	glutTimerFunc(60, timer, 0);
 	glutPostRedisplay();
 }
-
-
 
 int graphicsPlay(int argc, char** argv) {
 
