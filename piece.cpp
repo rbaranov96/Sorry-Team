@@ -105,8 +105,10 @@ piece::piece(hue f) : Shape(f), radius(0) {
 //takes hue, position
 piece::piece(hue h, double position_x, double position_y) {
 	set_fill(h);
+	set_color(color);
 	set_position(position_x, position_y);
 	radius = 20;
+
 }
 
 piece:: ~piece() {

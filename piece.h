@@ -86,6 +86,7 @@ public:
 	void draw() const override;
 	//draw a piece that can move
 	void draw(double x, double y);
+
 private:
 	double radius;
 };

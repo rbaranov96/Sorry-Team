@@ -17,6 +17,8 @@ public:
 	//attributes
 	cardface face;
 	string human_rules;
+	int move_rules;
+	bool startable;
 	//print out card's information
 	void print_info();
 	//return face with corrections
