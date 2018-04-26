@@ -10,7 +10,7 @@
 #include <string>
 #include <memory>
 #include <vector>
-#include "piece.h"
+#include "space.h"
 
 
 using namespace std;
@@ -74,6 +74,8 @@ public:
 	//easy constructor to use in main
 	//takes hue, position
 	piece(hue h, double position_x, double position_y);
+	//space constructor
+	piece(hue h, space s);
 
 	~piece();
 
@@ -86,6 +88,11 @@ public:
 	void draw() const override;
 	//draw a piece that can move
 	void draw(double x, double y);
+
+	space on_space;
+	void set_space(space given_space);
+	space get_space();
+	int get_piece_space_number();
 
 private:
 	double radius;

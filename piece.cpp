@@ -111,6 +111,14 @@ piece::piece(hue h, double position_x, double position_y) {
 
 }
 
+//space constructor
+piece::piece(hue h, space s) {
+	set_fill(h);
+	set_space(s);
+	set_position(s.get_x_center(), s.get_y_center());
+	radius = 20;
+}
+
 piece:: ~piece() {
 	// does nothing
 }
@@ -151,3 +159,16 @@ void piece::draw(double x, double y) {
 	glEnd();
 }
 
+//set the space of the piece
+//Author: Jay Brideau
+void piece::set_space(space given_space) {
+	on_space = given_space;
+}
+
+space piece::get_space() {
+	return on_space;
+}
+
+int piece::get_piece_space_number() {
+	return on_space.get_space_number();
+}

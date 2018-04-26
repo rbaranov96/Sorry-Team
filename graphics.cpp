@@ -1457,11 +1457,9 @@ void move_piece(int &x, int &y, piece &p, card c) {
 			&& 80 <= p.get_piece_space_number() && p.get_piece_space_number() <= 83
 			&& c.startable
 			) {
-			cout << p.get_piece_space_number() << endl;
 				p.set_space(game_board[4]);
 				x = game_board[4].get_x_center();
 				y = game_board[4].get_y_center();
-				cout << p.get_piece_space_number() << endl;
 		}
 		//blue start
 		else if (p.get_fill().blue == 1
@@ -1471,7 +1469,6 @@ void move_piece(int &x, int &y, piece &p, card c) {
 			p.set_space(game_board[19]);
 			x = game_board[19].get_x_center();
 			y = game_board[19].get_y_center();
-			cout << p.get_piece_space_number() << endl;
 		}
 		//yellow start
 		else if (p.get_fill().red == 1 && p.get_fill().green == 1
@@ -1481,7 +1478,6 @@ void move_piece(int &x, int &y, piece &p, card c) {
 			p.set_space(game_board[34]);
 			x = game_board[34].get_x_center();
 			y = game_board[34].get_y_center();
-			cout << p.get_piece_space_number() << endl;
 		}
 		//green start
 		else if (p.get_fill().green == 1 && p.get_fill().red == 0
@@ -1491,35 +1487,15 @@ void move_piece(int &x, int &y, piece &p, card c) {
 			p.set_space(game_board[49]);
 			x = game_board[49].get_x_center();
 			y = game_board[49].get_y_center();
-			cout << p.get_piece_space_number() << endl;
 		}
 		//other moves
-		else 
+		else if (p.get_piece_space_number() < 80)
 			{
-			cout << "move attempt" << endl;
-			cout << p.get_piece_space_number() << endl;
-			cout << c.move_rules << endl;
 			int final_space = p.get_piece_space_number() + c.move_rules;
-			cout << final_space << endl;
 			p.set_space(game_board[final_space]);
 			x = game_board[final_space].get_x_center();
 			y = game_board[final_space].get_y_center();
-			cout << p.get_piece_space_number() << endl;
 		}
-
-	//else if (c.get_face() == "3"){
-	//	if (p.get_fill().red == 1 && p.get_fill().green == 0
-	//		&& p.get_fill().blue == 0) {
-	//		x = 7 * space_pixel_width + (space_pixel_width / 2);
-	//		y = space_pixel_width / 2;
-	//	}
-	//}
-	//else if (c.get_face() == "4") {
-	//	//FINDME
-	//	x = red_home_run[2].get_x_center();
-	//	y = red_home_run[2].get_y_center();
-	//	red_home.push_back(p);
-	//}
 
 	glutPostRedisplay();
 }
@@ -1527,7 +1503,7 @@ void move_piece(int &x, int &y, piece &p, card c) {
 //allow user to click things
 //Author: Jay Brideau
 void mouse(int button, int state, int x, int y) {
-	//user can click on a test piece to move it around the board
+	//user can click on a piece to move it around the board
 	//Author: Jay Brideau
 	if (state == GLUT_DOWN){
 		if (
@@ -1657,24 +1633,6 @@ void mouse(int button, int state, int x, int y) {
 		}
 
 	}
-
-
-	/*else if (
-		(x >= red1_x - (space_pixel_width / 2)) && (x <= red1_x + (space_pixel_width / 2))
-		&& (y >= red1_y - (space_pixel_width / 2)) && (y <= red1_y + (space_pixel_width / 2))
-		&& (red1_y + space_pixel_width / 2) < 15 * space_pixel_width
-		&& (red1_x + space_pixel_width/2) >= 15 * space_pixel_width
-		) {
-		red1_y += space_pixel_width;
-	}
-	else if (
-		(x >= red1_x - (space_pixel_width / 2)) && (x <= red1_x + (space_pixel_width / 2))
-		&& (y >= red1_y - (space_pixel_width / 2)) && (y <= red1_y + (space_pixel_width / 2))
-		&& (red1_y + (space_pixel_width/2) >= 15 * space_pixel_width)
-		&& (red1_x -(space_pixel_width/2) > 0)
-		) {
-		red1_x -= space_pixel_width;
-	}*/
 
 	//let user draw a card from the deck
 	//Author: Jay Brideau

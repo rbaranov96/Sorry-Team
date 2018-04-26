@@ -11,6 +11,7 @@ using namespace std;
 //Author: Jay Brideau
 class space {
 public:
+	space();
 	space(int space_number,  int x_center, int y_center);
 	int space_number;
 	int x_center;
@@ -18,6 +19,8 @@ public:
 
 	int get_x_center();
 	int get_y_center();
+
+	int get_space_number();
 
 };
 
