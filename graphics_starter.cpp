@@ -6,16 +6,23 @@
 #include <cmath>
 #include <iostream>
 #include <fstream>
-#include "graphics.h"
 #include <math.h>
-#include "main.cpp"
+#include "piece.h"
+#include "graphics.hpp"
+#include "card_deck.h"
+#include "card.h"
+#include "space.h"
 
 using namespace std;
 
-int mouse_x, mouse_y;
-int width, height;
-int wd;
-int subwd;
+enum screen_state {menu, game_play, pause, game_over};
+
+screen_state screen = menu;
+
+int startmouse_x, startmouse_y;
+int startwidth, startheight;
+int startwd;
+int startsubwd;
 
 string gameinfor[] = {"player","no","no","no"};
 
@@ -80,17 +87,17 @@ float computer3lv43 = 0.35;
 
 
 
-void init() {
-    width = 600;
-    height = 600;
-    mouse_x = mouse_y = 0;
+void startinit() {
+    startwidth = 1200;
+    startheight = 720;
+    startmouse_x = startmouse_y = 0;
     
 }
 
 
 
 /* Initialize OpenGL Graphics */
-void initGL() {
+void startinitGL() {
     // Set "clearing" or background color
     glClearColor(0.1f, 0.1f, 0.5f, 1.0f); // almost black and opaque
     
@@ -119,15 +126,15 @@ void text(const char *text, int length, int x , int y){
 }
 /* Handler for window-repaint event. Call back when the window first appears and
  whenever the window needs to be re-painted. */
-void display() {
+void startdisplay() {
     // tell OpenGL to use the whole window for drawing
-    glViewport(0, 0, width, height);
+    glViewport(0, 0, startwidth, startheight);
     
     // do an orthographic parallel projection with the coordinate
     // system set to first quadrant, limited by screen/window size
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0.0, width, height, 0.0, -1.f, 1.f);
+    glOrtho(0.0, startwidth, startheight, 0.0, -1.f, 1.f);
     
     glClear(GL_COLOR_BUFFER_BIT);   // Clear the color buffer with current clearing color
     
@@ -466,6 +473,12 @@ void display() {
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, textbegin[i]);
     }
     
+    switch(screen) {
+        case game_play:
+            display();
+            break;
+    }
+    
 
 
     
@@ -475,13 +488,13 @@ void display() {
 void displayintroduction() {
     
     // tell OpenGL to use the whole window for drawing
-    glViewport(0, 0, width/2, height/2);
+    glViewport(0, 0, startwidth/2, startheight/2);
     
     // do an orthographic parallel projection with the coordinate
     // system set to first quadrant, limited by screen/window size
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0.0, width/2, height/2, 0.0, -1.f, 1.f);
+    glOrtho(0.0, startwidth/2, startheight/2, 0.0, -1.f, 1.f);
     
     glClear(GL_COLOR_BUFFER_BIT);   // Clear the color buffer with current clearing color
     
@@ -511,26 +524,30 @@ void displayintroduction() {
     
 }
 
-void kbd(unsigned char key, int x, int y) {
+void startkbd(unsigned char key, int x, int y) {
     
     glutPostRedisplay();
     
     return;
 }
 
-void timer(int extra) {
-    glutTimerFunc(60, timer, 0);
+void starttimer(int extra) {
+    glutTimerFunc(60, starttimer, 0);
     glutPostRedisplay();
 }
 
 void intromouse(int button, int state, int x, int y) {
     if (x >= 125 && x <= 175 && y >= 250
         && y <= 275) {
-        glutDestroyWindow(subwd);
+        glutDestroyWindow(startsubwd);
     }
 }
 
-void mouse(int button, int state, int x, int y) {
+void startmouse(int button, int state, int x, int y) {
+    if (screen == game_play) {
+        mouse(button, state, x, y);
+    } else {
+    
     if (x >= 250 && x <= 350 && y >= 500
         && y <= 550) {
         int countcomputernum = 0;
@@ -551,35 +568,37 @@ void mouse(int button, int state, int x, int y) {
             cout << "Computer2 :" << gameinfor[2] <<endl;
             cout << "Computer3 :" << gameinfor[3] <<endl;
             
+            screen = game_play;
             
-            glutDestroyWindow(wd);
-            gameboardinit();
-        
-            glutInitDisplayMode(GLUT_RGBA);
-        
-            glutInitWindowSize((int)gameboardwidth, (int)gameboardheight);
-            glutInitWindowPosition(50, 50); // Position the window's initial top-left corner
-        /* create the window and store the handle to it */
-            gameboardwd = glutCreateWindow("Sorry Game!" /* title */);
-        
-        // Register callback handler for window re-paint event
-            glutDisplayFunc(gameboarddisplay);
-        
-        // Our own OpenGL initialization
-            gameboardinitGL();
-        
-        // register keyboard press event processing function
-        // works for numbers, letters, spacebar, etc.
-            glutKeyboardFunc(gameboardkbd);
-        
-        // handles timer
-            glutTimerFunc(0, gameboardtimer, 0);
-        
-        //clickable button
-            glutMouseFunc(gameboardmouse);
-        
-        // Enter the event-processing loop
-            glutMainLoop();
+            
+            
+//            init();
+//        
+//            glutInitDisplayMode(GLUT_RGBA);
+//        
+//            glutInitWindowSize((int)width, (int)height);
+//            glutInitWindowPosition(50, 50); // Position the window's initial top-left corner
+//        /* create the window and store the handle to it */
+//            wd = glutCreateWindow("Sorry Game!" /* title */);
+//        
+//        // Register callback handler for window re-paint event
+//            glutDisplayFunc(display);
+//        
+//        // Our own OpenGL initialization
+//            initGL();
+//        
+//        // register keyboard press event processing function
+//        // works for numbers, letters, spacebar, etc.
+//            glutKeyboardFunc(kbd);
+//        
+//        // handles timer
+//            glutTimerFunc(0, timer, 0);
+//        
+//        //clickable button
+//            glutMouseFunc(mouse);
+//        
+//        // Enter the event-processing loop
+//            glutMainLoop();
         }
         
     }
@@ -587,27 +606,27 @@ void mouse(int button, int state, int x, int y) {
     if (x >= 450 && x <= 575 && y >= 25
         && y <= 65) {
         
-        init();
+        startinit();
         
         glutInitDisplayMode(GLUT_RGBA);
         
-        glutInitWindowSize((int)width/2, (int)height/2);
+        glutInitWindowSize((int)startwidth/2, (int)startheight/2);
         glutInitWindowPosition(50, 50); // Position the window's initial top-left corner
         /* create the window and store the handle to it */
-        subwd = glutCreateWindow("Introduction!" /* title */);
+        startsubwd = glutCreateWindow("Introduction!" /* title */);
         
         // Register callback handler for window re-paint event
         glutDisplayFunc(displayintroduction);
         
         // Our own OpenGL initialization
-        gameboardinitGL();
+        startinitGL();
         
         // register keyboard press event processing function
         // works for numbers, letters, spacebar, etc.
-        glutKeyboardFunc(kbd);
+        glutKeyboardFunc(startkbd);
         
         // handles timer
-        glutTimerFunc(0, timer, 0);
+        glutTimerFunc(0, starttimer, 0);
         
         //clickable button
         glutMouseFunc(intromouse);
@@ -918,39 +937,40 @@ void mouse(int button, int state, int x, int y) {
         computer3lv42 = 0;
         computer3lv43 = 0;
     }
-    
+        
+    }
     
     
 }
 
-int main(int argc, char** argv) {
+int start(int argc, char** argv) {
     
-    init();
+    startinit();
     
     glutInit(&argc, argv);          // Initialize GLUT
     
     glutInitDisplayMode(GLUT_RGBA);
     
-    glutInitWindowSize((int)width, (int)height);
+    glutInitWindowSize((int)startwidth, (int)startheight);
     glutInitWindowPosition(50, 50); // Position the window's initial top-left corner
     /* create the window and store the handle to it */
-    wd = glutCreateWindow("Sorry!" /* title */);
+   startwd = glutCreateWindow("Sorry!" /* title */);
     
     // Register callback handler for window re-paint event
-    glutDisplayFunc(display);
+    glutDisplayFunc(startdisplay);
     
     // Our own OpenGL initialization
-    initGL();
+    startinitGL();
     
     // register keyboard press event processing function
     // works for numbers, letters, spacebar, etc.
-    glutKeyboardFunc(kbd);
+    glutKeyboardFunc(startkbd);
     
     // handles timer
-    glutTimerFunc(0, timer, 0);
+    glutTimerFunc(0, starttimer, 0);
     
     //clickable button
-    glutMouseFunc(mouse);
+    glutMouseFunc(startmouse);
     
     // Enter the event-processing loop
     glutMainLoop();
