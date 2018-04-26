@@ -156,25 +156,25 @@ void init() {
 
 	//initialize pieces
 	//red pieces
-	red1 = piece({ 1,0,0 }, red1_x, red1_y);
-	red2 = piece({ 1,0,0 }, red2_x, red2_y);
-	red3 = piece({ 1,0,0 }, red3_x, red3_y);
-	red4 = piece({ 1,0,0 }, red4_x, red4_y);
+	red1 = piece({ 1,0,0 }, red_start_spaces[0]);
+	red2 = piece({ 1,0,0 }, red_start_spaces[1]);
+	red3 = piece({ 1,0,0 }, red_start_spaces[2]);
+	red4 = piece({ 1,0,0 }, red_start_spaces[3]);
 	//blue pieces
-	blue1 = piece({ 0,0,1 }, blue1_x, blue1_y);
-	blue2 = piece({ 0,0,1 }, blue2_x, blue2_y);
-	blue3 = piece({ 0,0,1 }, blue3_x, blue3_y);
-	blue4 = piece({ 0,0,1 }, blue4_x, blue4_y);
+	blue1 = piece({ 0,0,1 }, blue_start_spaces[0]);
+	blue2 = piece({ 0,0,1 }, blue_start_spaces[1]);
+	blue3 = piece({ 0,0,1 }, blue_start_spaces[2]);
+	blue4 = piece({ 0,0,1 }, blue_start_spaces[3]);
 	//yellow pieces
-	yellow1 = piece({ 1,1,0 }, yellow1_x, yellow1_y);
-	yellow2 = piece({ 1,1,0 }, yellow2_x, yellow2_y);
-	yellow3 = piece({ 1,1,0 }, yellow3_x, yellow3_y);
-	yellow4 = piece({ 1,1,0 }, yellow4_x, yellow4_y);
+	yellow1 = piece({ 1,1,0 }, yellow_start_spaces[0]);
+	yellow2 = piece({ 1,1,0 }, yellow_start_spaces[1]);
+	yellow3 = piece({ 1,1,0 }, yellow_start_spaces[2]);
+	yellow4 = piece({ 1,1,0 }, yellow_start_spaces[3]);
 	//green pieces
-	green1 = piece({ 0,1,0 }, green1_x, green1_y);
-	green2 = piece({ 0,1,0 }, green2_x, green2_y);
-	green3 = piece({ 0,1,0 }, green3_x, green3_y);
-	green4 = piece({ 0,1,0 }, green4_x, green4_y);
+	green1 = piece({ 0,1,0 }, green_start_spaces[0]);
+	green2 = piece({ 0,1,0 }, green_start_spaces[1]);
+	green3 = piece({ 0,1,0 }, green_start_spaces[2]);
+	green4 = piece({ 0,1,0 }, green_start_spaces[3]);
 
 }
 
@@ -1251,6 +1251,15 @@ void draw_gameboard() {
 				   6 * space_pixel_width + 55 + 55 * sin(i * M_PI / 180.0));
 	}
 	glEnd();
+	//red home spaces TODO
+	space space96 = space(96, 1 * space_pixel_width, 3 * space_pixel_width + 55);
+	red_home_spaces.push_back(space96);
+	space space97 = space(97, 2 * space_pixel_width, 3 * space_pixel_width + 55);
+	red_home_spaces.push_back(space97);
+	space space98 = space(98, 1 * space_pixel_width, 4 * space_pixel_width + 55);
+	red_home_spaces.push_back(space98);
+	space space99 = space(99, 2 * space_pixel_width, 4 * space_pixel_width + 55);
+	red_home_spaces.push_back(space99);
 
 	//red start
 	glBegin(GL_TRIANGLE_FAN);
@@ -1261,15 +1270,6 @@ void draw_gameboard() {
 				   55 + space_pixel_width + 55 * sin(i * M_PI / 180.0));
 	}
 	glEnd();
-	////add spaces for red start
-	//space space80 = space(80, 4 * space_pixel_width, 1 * space_pixel_width + (space_pixel_width / 2) + 10);
-	//red_start_spaces.push_back(space80);
-	//space space81 = space(81, 5 * space_pixel_width, 1 * space_pixel_width + (space_pixel_width / 2) + 10);
-	//red_start_spaces.push_back(space81);
-	//space space82 = space(82, 4 * space_pixel_width, 2 * space_pixel_width + (space_pixel_width / 2) + 10);
-	//red_start_spaces.push_back(space82);
-	//space space83 = space(83, 5 * space_pixel_width, 2 * space_pixel_width + (space_pixel_width / 2) + 10);
-	//red_start_spaces.push_back(space83);
 
 	//blue home
 	glBegin(GL_TRIANGLE_FAN);
@@ -1280,6 +1280,8 @@ void draw_gameboard() {
 				   2 * space_pixel_width + (space_pixel_width / 2) + 55 * sin(i * M_PI / 180.0));
 	}
 	glEnd();
+	//blue home spaces TODO
+
 	//blue start
 	glBegin(GL_TRIANGLE_FAN);
 	glColor3f(0.4, 0.4, 1);
@@ -1298,6 +1300,8 @@ void draw_gameboard() {
 				   10 * space_pixel_width - 50+ 55 * sin(i * M_PI / 180.0));
 	}
 	glEnd();
+	//yellow home spaces TODO
+
 	//yellow start
 	glBegin(GL_TRIANGLE_FAN);
 	glColor3f(1, 1, 0.7);
@@ -1316,6 +1320,8 @@ void draw_gameboard() {
 				   13 * space_pixel_width + (space_pixel_width / 2) + 55 * sin(i * M_PI / 180.0));
 	}
 	glEnd();
+	//green home spaces TODO
+
 	//green start
 	glBegin(GL_TRIANGLE_FAN);
 	glColor3f(0.6, 1, 0.6);
@@ -1447,22 +1453,34 @@ void kbd(unsigned char key, int x, int y) {
 void move_piece(int &x, int &y, piece p, card c) {
 	if (c.startable) {
 		//red start
-		if (p.get_fill().red == 1 && p.get_fill().green == 0) {
-			x = game_board[4].get_x_center();
-			y = game_board[4].get_y_center();
+		if (p.get_fill().red == 1 && p.get_fill().green == 0 
+			&& 80 <= p.get_piece_space_number() && p.get_piece_space_number() <= 83
+			) {
+			p.set_space(game_board[4]);
+				x = game_board[4].get_x_center();
+				y = game_board[4].get_y_center();
 		}
 		//blue start
-		else if (p.get_fill().blue == 1) {
+		else if (p.get_fill().blue == 1
+			&& 84 <= p.get_piece_space_number() && p.get_piece_space_number() <= 87
+			) {
+			p.set_space(game_board[19]);
 			x = game_board[19].get_x_center();
 			y = game_board[19].get_y_center();
 		}
 		//yellow start
-		else if (p.get_fill().red == 1 && p.get_fill().green == 1) {
+		else if (p.get_fill().red == 1 && p.get_fill().green == 1
+			&& 88 <= p.get_piece_space_number() && p.get_piece_space_number() <= 91
+			) {
+			p.set_space(game_board[34]);
 			x = game_board[34].get_x_center();
 			y = game_board[34].get_y_center();
 		}
 		//green start
-		else if (p.get_fill().green == 1 && p.get_fill().red == 0) {
+		else if (p.get_fill().green == 1 && p.get_fill().red == 0
+			&& 92 <= p.get_piece_space_number() && p.get_piece_space_number() <= 95
+			) {
+			p.set_space(game_board[49]);
 			x = game_board[49].get_x_center();
 			y = game_board[49].get_y_center();
 		}
@@ -1649,7 +1667,7 @@ void timer(int extra) {
 }
 
 
-
+//main graphics method
 int graphicsPlay(int argc, char** argv) {
 
 	init();
@@ -1679,7 +1697,28 @@ int graphicsPlay(int argc, char** argv) {
 	// handles timer
 	glutTimerFunc(0, timer, 0);
 
-	// Enter the event-processing loop
-	glutMainLoop();
+
+
+	if (red1.get_piece_space_number() == 96 && red2.get_piece_space_number() == 97 && red3.get_piece_space_number() == 98
+		&& red4.get_piece_space_number() == 99) {
+		cout << "red wins!" << endl;
+	}
+	else if ( blue1.get_piece_space_number() == 100 && blue2.get_piece_space_number() == 101 && blue2.get_piece_space_number() == 102 
+		&& blue4.get_piece_space_number() == 103) {
+		cout << "blue wins!";
+	}
+	else if (yellow1.get_piece_space_number() == 104 && yellow2.get_piece_space_number() == 105 && yellow2.get_piece_space_number() == 106
+		&& yellow4.get_piece_space_number() == 107) {
+		cout << "yellow wins!";
+	}
+	else if (green1.get_piece_space_number() == 108 && green2.get_piece_space_number() == 109 && green2.get_piece_space_number() == 110
+		&& green4.get_piece_space_number() == 111) {
+		cout << "green wins!";
+	}
+	else {
+		// Enter the event-processing loop
+		glutMainLoop();
+	}
+
 	return 0;
 }
