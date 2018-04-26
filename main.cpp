@@ -14,7 +14,7 @@
 //main function
 int main(int argc, char** argv) {
 
-	graphicsPlay(argc, argv);
+	start(argc, argv);
 
 	
 }

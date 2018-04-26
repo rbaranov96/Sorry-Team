@@ -26,6 +26,9 @@
 // as we haven't created a GLUT window yet
 void init(void);
 
+// Effects: Draws circle of specified pixel radius with center at pixel (x,y)
+void drawCircle(int x, int y, int radius);
+
 // Callback functions for GLUT */
 
 // Draw the window - this is where all the GL actions are
@@ -42,7 +45,7 @@ void refresh(void);
 // Trap and process keyboard events
 void kbd(unsigned char key, int x, int y);
 
-// Handle "mouse cursor moved" events 
+// Handle "mouse cursor moved" events
 void cursor(int x, int y);
 
 // Handle "mouse moved with button pressed" events
@@ -54,39 +57,3 @@ void mouse(int button, int state, int x, int y);
 int graphicsPlay(int argc, char *argv[]);
 
 #endif /* graphics_h */
-
-// Program initialization NOT OpenGL/GLUT dependent,
-// as we haven't created a GLUT window yet
-void startinit(void);
-
-// Effects: Draws circle of specified pixel radius with center at pixel (x,y)
-void drawCircle(int x, int y, int radius);
-
-// Callback functions for GLUT */
-
-// Draw the window - this is where all the GL actions are
-void startdisplay(void);
-
-// Called when window is resized,
-// also when window is first created,
-// before the first call to display().
-void reshape(int w, int h);
-
-// Refresh the display, called when system is idle
-void refresh(void);
-
-// Trap and process keyboard events
-void startkbd(unsigned char key, int x, int y);
-
-// Handle "mouse cursor moved" events
-void cursor(int x, int y);
-
-// Handle "mouse moved with button pressed" events
-void drag(int x, int y);
-
-// Handle mouse button pressed and released events
-void startmouse(int button, int state, int x, int y,int argc, char** argv);
-
-int start(int argc, char *argv[]);
-
-

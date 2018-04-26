@@ -864,7 +864,7 @@ void draw_gameboard() {
 	glVertex2i((3 * space_pixel_width), (5 * space_pixel_width));
 	glVertex2i((2 * space_pixel_width), (5 * space_pixel_width));
 	glEnd();
-	space space63 = space(63, 2 * space_pixel_width + (space_pixel_width / 2), 3 * space_pixel_width + (space_pixel_width / 2));
+	space space63 = space(63, 2 * space_pixel_width + (space_pixel_width / 2), 4 * space_pixel_width + (space_pixel_width / 2));
 	red_home_run.push_back(space63);
 	//space no: 64
 	glBegin(GL_QUADS);
@@ -874,7 +874,7 @@ void draw_gameboard() {
 	glVertex2i((3 * space_pixel_width), (6 * space_pixel_width));
 	glVertex2i((2 * space_pixel_width), (6 * space_pixel_width));
 	glEnd();
-	space space64 = space(64, 2 * space_pixel_width + (space_pixel_width / 2), 4 * space_pixel_width + (space_pixel_width / 2));
+	space space64 = space(64, 2 * space_pixel_width + (space_pixel_width / 2), 5 * space_pixel_width + (space_pixel_width / 2));
 	red_home_run.push_back(space64);
 	//blue home run
 	//space no: 65
@@ -1246,7 +1246,7 @@ void draw_gameboard() {
 	glBegin(GL_TRIANGLE_FAN);
 	glColor3f(1, 0.4, 0.4);
 	glVertex2i(2 * space_pixel_width + (space_pixel_width / 2), 4 * space_pixel_width + 55);
-	for (int i = 0; i <= 360; ++i) {
+	for (int i = 0; i <= 361; ++i) {
 		glVertex2i(2 * space_pixel_width + (space_pixel_width / 2) + 55 * cos(i * M_PI / 180.0),
 				   6 * space_pixel_width + 55 + 55 * sin(i * M_PI / 180.0));
 	}
@@ -1265,7 +1265,7 @@ void draw_gameboard() {
 	glBegin(GL_TRIANGLE_FAN);
 	glColor3f(1, 0.4, 0.4);
 	glVertex2i(4 * space_pixel_width + (space_pixel_width / 2), space_pixel_width + 55);
-	for (int i = 0; i <= 360; ++i) {
+	for (int i = 0; i <= 361; ++i) {
 		glVertex2i(4 * space_pixel_width + (space_pixel_width / 2) + 55 * cos(i * M_PI / 180.0),
 				   55 + space_pixel_width + 55 * sin(i * M_PI / 180.0));
 	}
@@ -1492,9 +1492,31 @@ void move_piece(int &x, int &y, piece &p, card c) {
 		else if (p.get_piece_space_number() < 80)
 			{
 			int final_space = p.get_piece_space_number() + c.move_rules;
-			p.set_space(game_board[final_space]);
-			x = game_board[final_space].get_x_center();
-			y = game_board[final_space].get_y_center();
+			cout << "start space: " << p.get_piece_space_number() << endl;
+			cout << "final space: " << final_space << endl;
+			if (p.get_fill().red == 1 && p.get_fill().green == 0 && final_space > 2 && p.get_piece_space_number() <= 2) {
+				int remaining_move = final_space - 3;
+				cout << "remaining move: " << remaining_move << endl;
+				p.set_space(red_home_run[0]);
+				x = 2 * space_pixel_width + (space_pixel_width / 2);
+				y = 1 * space_pixel_width + (space_pixel_width / 2);
+				cout << "new piece number: " << p.get_piece_space_number() << endl;
+				final_space = p.get_piece_space_number() + remaining_move;
+				cout << "new finale space: " << final_space << endl;
+				p.set_space(red_home_run[final_space]);
+				x = red_home_run[final_space].get_x_center();
+				y = red_home_run[final_space].get_y_center();
+			}
+			else if (p.get_fill().red == 1 && p.get_fill().green == 0 && p.get_piece_space_number()>=60) {
+				p.set_space(red_home_run[final_space]);
+				x = red_home_run[final_space].get_x_center();
+				y = red_home_run[final_space].get_y_center();
+			}
+			else {
+				p.set_space(game_board[final_space]);
+				x = game_board[final_space].get_x_center();
+				y = game_board[final_space].get_y_center();
+			}
 		}
 
 	glutPostRedisplay();
