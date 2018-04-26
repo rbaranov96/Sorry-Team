@@ -31,9 +31,9 @@ vector<space> blue_home_spaces;
 vector<space> yellow_home_spaces;
 vector<space> green_home_spaces;
 vector<space> red_start_spaces;
-vector<space> blue_home_spaces;
-vector<space> yellow_home_spaces;
-vector<space> green_home_spaces;
+vector<space> blue_start_spaces;
+vector<space> yellow_start_spaces;
+vector<space> green_start_spaces;
 
 //vector<piece> red_start;
 //vector<piece> blue_start;
@@ -45,41 +45,10 @@ vector<space> green_home_spaces;
 //initialize x and y for all pieces
 //Author: Jay Brideau
 //initialize red x and y
-int red1_x = (4 * space_pixel_width);
-int red1_y = 1 * space_pixel_width + (space_pixel_width / 2) + 10;
-int red2_x = (5 * space_pixel_width);
-int red2_y = 1 * space_pixel_width + (space_pixel_width / 2) + 10;
-int red3_x = 4 * space_pixel_width;
-int red3_y = 2 * space_pixel_width + (space_pixel_width / 2) + 10;
-int red4_x = 5 * space_pixel_width;
-int red4_y = 2 * space_pixel_width + (space_pixel_width / 2) + 10;
-//initialize blue x and y
-int blue1_x = 13 * space_pixel_width + 10;
-int blue1_y = 4 * space_pixel_width;
-int blue2_x = 14 * space_pixel_width + 10;
-int blue2_y = 4 * space_pixel_width;
-int blue3_x = 13 * space_pixel_width + 10;
-int blue3_y = 5 * space_pixel_width;
-int blue4_x = 14 * space_pixel_width + 10;
-int blue4_y = 5 * space_pixel_width;
-//initialize yellow x and y
-int yellow1_x = 11 * space_pixel_width;
-int yellow1_y = 13 * space_pixel_width + 10;
-int yellow2_x = 12 * space_pixel_width;
-int yellow2_y = 13 * space_pixel_width + 10;
-int yellow3_x = 11 * space_pixel_width;
-int yellow3_y = 14 * space_pixel_width + 10;
-int yellow4_x = 12 * space_pixel_width;
-int yellow4_y = 14 * space_pixel_width + 10;
-//initialize green x and y
-int green1_x = 2 * space_pixel_width - 10;
-int green1_y = 11 * space_pixel_width;
-int green2_x = 3 * space_pixel_width - 10;
-int green2_y = 11 * space_pixel_width;
-int green3_x = 2 * space_pixel_width - 10;
-int green3_y = 12 * space_pixel_width;
-int green4_x = 3 * space_pixel_width - 10;
-int green4_y = 12 * space_pixel_width;
+int red1_x, red1_y, red2_x, red2_y, red3_x, red3_y, red4_x, red4_y;
+int blue1_x, blue1_y, blue2_x, blue2_y, blue3_x, blue3_y, blue4_x, blue4_y;
+int yellow1_x, yellow1_y, yellow2_x, yellow2_y, yellow3_x, yellow3_y, yellow4_x, yellow4_y;
+int green1_x, green1_y, green2_x, green2_y, green3_x, green3_y, green4_x, green4_y;
 
 //GAME BOARD CLICKABILITY
 int mouse_x, mouse_y;
@@ -107,6 +76,83 @@ void init() {
 	mouse_x = mouse_y = 0;
 	draw_deck.fill_deck();
 	draw_deck.shuffle_deck();
+
+	//add spaces for red start
+	space space80 = space(80, 4 * space_pixel_width, 1 * space_pixel_width + (space_pixel_width / 2) + 10);
+	red_start_spaces.push_back(space80);
+	space space81 = space(81, 5 * space_pixel_width, 1 * space_pixel_width + (space_pixel_width / 2) + 10);
+	red_start_spaces.push_back(space81);
+	space space82 = space(82, 4 * space_pixel_width, 2 * space_pixel_width + (space_pixel_width / 2) + 10);
+	red_start_spaces.push_back(space82);
+	space space83 = space(83, 5 * space_pixel_width, 2 * space_pixel_width + (space_pixel_width / 2) + 10);
+	red_start_spaces.push_back(space83);
+
+	//add spaces for blue start
+	space space84 = space(84, 13 * space_pixel_width + 10, 4 * space_pixel_width);
+	blue_start_spaces.push_back(space84);
+	space space85 = space(85, 14 * space_pixel_width + 10, 4 * space_pixel_width);
+	blue_start_spaces.push_back(space85);
+	space space86 = space(86, 13 * space_pixel_width + 10, 5 * space_pixel_width);
+	blue_start_spaces.push_back(space86);
+	space space87 = space(87, 14 * space_pixel_width + 10, 5 * space_pixel_width);
+	blue_start_spaces.push_back(space87);
+
+	//add spaces for yellow start
+	space space88 = space(88, 11 * space_pixel_width, 13 * space_pixel_width + (space_pixel_width / 2) - 10);
+	yellow_start_spaces.push_back(space88);
+	space space89 = space(89, 12 * space_pixel_width, 13 * space_pixel_width + (space_pixel_width / 2) - 10);
+	yellow_start_spaces.push_back(space89);
+	space space90 = space(90, 11 * space_pixel_width, 14 * space_pixel_width + (space_pixel_width / 2) - 10);
+	yellow_start_spaces.push_back(space90);
+	space space91 = space(91, 12 * space_pixel_width, 14 * space_pixel_width + (space_pixel_width / 2) - 10);
+	yellow_start_spaces.push_back(space91);
+
+	//add spaces for green start
+	space space92 = space(92, 2 * space_pixel_width - 10, 11 * space_pixel_width);
+	green_start_spaces.push_back(space92);
+	space space93 = space(93, 3 * space_pixel_width - 10, 11 * space_pixel_width);
+	green_start_spaces.push_back(space93);
+	space space94 = space(94, 2 * space_pixel_width - 10, 12 * space_pixel_width);
+	green_start_spaces.push_back(space94);
+	space space95 = space(95, 3 * space_pixel_width - 10, 12 * space_pixel_width);
+	green_start_spaces.push_back(space95);
+
+	//initialize red x and y
+	red1_x = red_start_spaces[0].get_x_center();
+	red1_y = red_start_spaces[0].get_y_center();
+	red2_x = red_start_spaces[1].get_x_center();
+	red2_y = red_start_spaces[1].get_y_center();
+	red3_x = red_start_spaces[2].get_x_center();
+	red3_y = red_start_spaces[2].get_y_center();
+	red4_x = red_start_spaces[3].get_x_center();
+	red4_y = red_start_spaces[3].get_y_center();
+	//initialize blue x and y
+	blue1_x = blue_start_spaces[0].get_x_center();
+	blue1_y = blue_start_spaces[0].get_y_center();
+	blue2_x = blue_start_spaces[1].get_x_center();
+	blue2_y = blue_start_spaces[1].get_y_center();
+	blue3_x = blue_start_spaces[2].get_x_center();
+	blue3_y = blue_start_spaces[2].get_y_center();
+	blue4_x = blue_start_spaces[3].get_x_center();
+	blue4_y = blue_start_spaces[3].get_y_center();
+	//initialize yellow x and y
+	yellow1_x = yellow_start_spaces[0].get_x_center();
+	yellow1_y = yellow_start_spaces[0].get_y_center();
+	yellow2_x = yellow_start_spaces[1].get_x_center();
+	yellow2_y = yellow_start_spaces[1].get_y_center();
+	yellow3_x = yellow_start_spaces[2].get_x_center();
+	yellow3_y = yellow_start_spaces[2].get_y_center();
+	yellow4_x = yellow_start_spaces[3].get_x_center();
+	yellow4_y = yellow_start_spaces[3].get_y_center();
+	//initialize green x and y
+	green1_x = green_start_spaces[0].get_x_center();
+	green1_y = green_start_spaces[0].get_y_center();
+	green2_x = green_start_spaces[1].get_x_center();
+	green2_y = green_start_spaces[1].get_y_center();
+	green3_x = green_start_spaces[2].get_x_center();
+	green3_y = green_start_spaces[2].get_y_center();
+	green4_x = green_start_spaces[3].get_x_center();
+	green4_y = green_start_spaces[3].get_y_center();
 
 	//initialize pieces
 	//red pieces
@@ -1205,8 +1251,6 @@ void draw_gameboard() {
 				   6 * space_pixel_width + 55 + 55 * sin(i * M_PI / 180.0));
 	}
 	glEnd();
-	//add spaces for home
-	
 
 	//red start
 	glBegin(GL_TRIANGLE_FAN);
@@ -1217,6 +1261,16 @@ void draw_gameboard() {
 				   55 + space_pixel_width + 55 * sin(i * M_PI / 180.0));
 	}
 	glEnd();
+	////add spaces for red start
+	//space space80 = space(80, 4 * space_pixel_width, 1 * space_pixel_width + (space_pixel_width / 2) + 10);
+	//red_start_spaces.push_back(space80);
+	//space space81 = space(81, 5 * space_pixel_width, 1 * space_pixel_width + (space_pixel_width / 2) + 10);
+	//red_start_spaces.push_back(space81);
+	//space space82 = space(82, 4 * space_pixel_width, 2 * space_pixel_width + (space_pixel_width / 2) + 10);
+	//red_start_spaces.push_back(space82);
+	//space space83 = space(83, 5 * space_pixel_width, 2 * space_pixel_width + (space_pixel_width / 2) + 10);
+	//red_start_spaces.push_back(space83);
+
 	//blue home
 	glBegin(GL_TRIANGLE_FAN);
 	glColor3f(0.4, 0.4, 1);
@@ -1342,10 +1396,10 @@ void display() {
 	red3.draw(red3_x, red3_y);
 	red4.draw(red4_x, red4_y);
 
-	red_start.push_back(red1);
-	red_start.push_back(red2);
-	red_start.push_back(red3);
-	red_start.push_back(red4);
+	//red_start.push_back(red1);
+	//red_start.push_back(red2);
+	//red_start.push_back(red3);
+	//red_start.push_back(red4);
 
 	//draw blue pieces
 	blue1.draw(blue1_x, blue1_y);
@@ -1353,30 +1407,30 @@ void display() {
 	blue3.draw(blue3_x, blue3_y);
 	blue4.draw(blue4_x, blue4_y);
 
-	blue_start.push_back(blue1);
-	blue_start.push_back(blue2);
-	blue_start.push_back(blue3);
-	blue_start.push_back(blue4);
+	//blue_start.push_back(blue1);
+	//blue_start.push_back(blue2);
+	//blue_start.push_back(blue3);
+	//blue_start.push_back(blue4);
 	//draw yellow pieces
 	yellow1.draw(yellow1_x, yellow1_y);
 	yellow2.draw(yellow2_x, yellow2_y);
 	yellow3.draw(yellow3_x, yellow3_y);
 	yellow4.draw(yellow4_x, yellow4_y);
 
-	yellow_start.push_back(yellow1);
-	yellow_start.push_back(yellow2);
-	yellow_start.push_back(yellow3);
-	yellow_start.push_back(yellow4);
+	//yellow_start.push_back(yellow1);
+	//yellow_start.push_back(yellow2);
+	//yellow_start.push_back(yellow3);
+	//yellow_start.push_back(yellow4);
 	//draw green pieces
 	green1.draw(green1_x, green1_y);
 	green2.draw(green2_x, green2_y);
 	green3.draw(green3_x, green3_y);
 	green4.draw(green4_x, green4_y);
 
-	green_start.push_back(green1);
+	/*green_start.push_back(green1);
 	green_start.push_back(green2);
 	green_start.push_back(green3);
-	green_start.push_back(green4);
+	green_start.push_back(green4);*/
 	glFlush();  // Render now
 }
 
