@@ -1200,7 +1200,7 @@ void display() {
 	glFlush();  // Render now
 }
 
-// hande keyboard input
+// handle keyboard input
 void kbd(unsigned char key, int x, int y) {
 
 	glutPostRedisplay();
@@ -1209,27 +1209,28 @@ void kbd(unsigned char key, int x, int y) {
 }
 
 //move method
+//Author: Jay Brideau and Robbie Baranov
 void move_piece(int &x, int &y, piece p, card c) {
 	if (c.startable) {
-		if (p.get_fill().red == 1 && p.get_fill().green == 0
-			&& p.get_fill().blue == 0 && red_start.size() != 0) {
+		//red start
+		if (p.get_fill().red == 1 && p.get_fill().green == 0) {
 			x = 4 * space_pixel_width + (space_pixel_width / 2);
 			y = space_pixel_width / 2;
 		}
-		if (p.get_fill().red == 0 && p.get_fill().green == 0
-			&& p.get_fill().blue == 1) {
-			x = 4 * space_pixel_width + (space_pixel_width / 2);
-			y = space_pixel_width / 2;
+		//blue start
+		else if (p.get_fill().blue == 1) {
+			x = 15 * space_pixel_width + (space_pixel_width / 2);
+			y = 4 * space_pixel_width + (space_pixel_width / 2);
 		}
-		if (p.get_fill().red == 1 && p.get_fill().green == 1
-			&& p.get_fill().blue == 0) {
-			x = 4 * space_pixel_width + (space_pixel_width / 2);
-			y = space_pixel_width / 2;
+		//yellow start
+		else if (p.get_fill().red == 1 && p.get_fill().green == 1) {
+			x = 11 * space_pixel_width + (space_pixel_width / 2);
+			y = 15 * space_pixel_width + (space_pixel_width / 2);
 		}
-		if (p.get_fill().red == 0 && p.get_fill().green == 1
-			&& p.get_fill().blue == 0) {
-			x = 4 * space_pixel_width + (space_pixel_width / 2);
-			y = space_pixel_width / 2;
+		//green start
+		else if (p.get_fill().green == 1 && p.get_fill().red == 0) {
+			x = (space_pixel_width / 2);
+			y = 11 * space_pixel_width + (space_pixel_width / 2);
 		}
 	}
 	else if (c.get_face() == "3"){
@@ -1264,18 +1265,114 @@ void mouse(int button, int state, int x, int y) {
 			move_piece(red2_x, red2_y, red2, drawn_card);
 		}
 		else if (
-			//piece red2
+			//piece red3
 				x >= red3_x - (space_pixel_width / 2) && x <= red3_x + space_pixel_width / 2
 				&& y >= red3_y - (space_pixel_width / 2) && y <= red3_y + space_pixel_width / 2
 				) {
 			move_piece(red3_x, red3_y, red3, drawn_card);
 		}
 		else if (
-			//piece red2
+			//piece red4
 				x >= red4_x - (space_pixel_width / 2) && x <= red4_x + space_pixel_width / 2
 				&& y >= red4_y - (space_pixel_width / 2) && y <= red4_y + space_pixel_width / 2
 				) {
 			move_piece(red4_x, red4_y, red4, drawn_card);
+		}
+		else if (
+			//piece blue1
+			x >= blue1_x - (space_pixel_width / 2) && x <= blue1_x + space_pixel_width / 2
+			&& y >= blue1_y - (space_pixel_width / 2) && y <= blue1_y + space_pixel_width / 2
+			&& state == GLUT_DOWN
+			) {
+			move_piece(blue1_x, blue1_y, blue1, drawn_card);
+		}
+		else if (
+			//piece blue2
+			x >= blue2_x - (space_pixel_width / 2) && x <= blue2_x + space_pixel_width / 2
+			&& y >= blue2_y - (space_pixel_width / 2) && y <= blue2_y + space_pixel_width / 2
+			&& state == GLUT_DOWN
+			) {
+			move_piece(blue2_x, blue2_y, blue2, drawn_card);
+		}
+		else if (
+			//piece blue3
+			x >= blue3_x - (space_pixel_width / 2) && x <= blue3_x + space_pixel_width / 2
+			&& y >= blue3_y - (space_pixel_width / 2) && y <= blue3_y + space_pixel_width / 2
+			&& state == GLUT_DOWN
+			) {
+			move_piece(blue3_x, blue3_y, blue3, drawn_card);
+		}
+		else if (
+			//piece blue4
+			x >= blue4_x - (space_pixel_width / 2) && x <= blue4_x + space_pixel_width / 2
+			&& y >= blue4_y - (space_pixel_width / 2) && y <= blue4_y + space_pixel_width / 2
+			&& state == GLUT_DOWN
+			) {
+			move_piece(blue4_x, blue4_y, blue4, drawn_card);
+		}
+		else if (
+			//piece yellow1
+			x >= yellow1_x - (space_pixel_width / 2) && x <= yellow1_x + space_pixel_width / 2
+			&& y >= yellow1_y - (space_pixel_width / 2) && y <= yellow1_y + space_pixel_width / 2
+			&& state == GLUT_DOWN
+			) {
+			move_piece(yellow1_x, yellow1_y, yellow1, drawn_card);
+		}
+		else if (
+			//piece yellow2
+			x >= yellow2_x - (space_pixel_width / 2) && x <= yellow2_x + space_pixel_width / 2
+			&& y >= yellow2_y - (space_pixel_width / 2) && y <= yellow2_y + space_pixel_width / 2
+			&& state == GLUT_DOWN
+			) {
+			move_piece(yellow2_x, yellow2_y, yellow2, drawn_card);
+		}
+		else if (
+			//piece yellow3
+			x >= yellow3_x - (space_pixel_width / 2) && x <= yellow3_x + space_pixel_width / 2
+			&& y >= yellow3_y - (space_pixel_width / 2) && y <= yellow3_y + space_pixel_width / 2
+			&& state == GLUT_DOWN
+			) {
+			move_piece(yellow3_x, yellow3_y, yellow3, drawn_card);
+		}
+		else if (
+			//piece yellow4
+			x >= yellow4_x - (space_pixel_width / 2) && x <= yellow4_x + space_pixel_width / 2
+			&& y >= yellow4_y - (space_pixel_width / 2) && y <= yellow4_y + space_pixel_width / 2
+			&& state == GLUT_DOWN
+			) {
+			move_piece(yellow4_x, yellow4_y, yellow4, drawn_card);
+		}
+		else if (
+			//piece green1
+			x >= green1_x - (space_pixel_width / 2) && x <= green1_x + space_pixel_width / 2
+			&& y >= green1_y - (space_pixel_width / 2) && y <= green1_y + space_pixel_width / 2
+			&& state == GLUT_DOWN
+			) {
+			move_piece(green1_x, green1_y, green1, drawn_card);
+		}
+		else if (
+			//piece green2
+			x >= green2_x - (space_pixel_width / 2) && x <= green2_x + space_pixel_width / 2
+			&& y >= green2_y - (space_pixel_width / 2) && y <= green2_y + space_pixel_width / 2
+			&& state == GLUT_DOWN
+			) {
+			move_piece(green2_x, green2_y, green2, drawn_card);
+		}
+		else if (
+			//piece green3
+			x >= green3_x - (space_pixel_width / 2) && x <= green3_x + space_pixel_width / 2
+			&& y >= green3_y - (space_pixel_width / 2) && y <= green3_y + space_pixel_width / 2
+			&& state == GLUT_DOWN
+			) {
+			move_piece(green3_x, green3_y, green3, drawn_card);
+		}
+		else if (
+			//piece green4
+			x >= green4_x - (space_pixel_width / 2) && x <= green4_x + space_pixel_width / 2
+			&& y >= green4_y - (space_pixel_width / 2) && y <= green4_y + space_pixel_width / 2
+			&& state == GLUT_DOWN
+			) {
+			move_piece(green4_x, green4_y, green4, drawn_card);
 		}
 
 	}
