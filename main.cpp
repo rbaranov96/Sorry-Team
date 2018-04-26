@@ -8,6 +8,7 @@
 #include "piece.h"
 #include "graphics.hpp"
 #include "card_deck.h"
+#include "space.h"
 
 
 //main function
