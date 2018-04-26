@@ -40,7 +40,7 @@ vector<space> green_start_spaces;
 //vector<piece> yellow_start;
 //vector<piece> green_start;
 
-
+vector<piece> red_home;
 
 //initialize x and y for all pieces
 //Author: Jay Brideau
@@ -1450,48 +1450,77 @@ void kbd(unsigned char key, int x, int y) {
 
 //move method
 //Author: Jay Brideau and Robbie Baranov
-void move_piece(int &x, int &y, piece p, card c) {
-	if (c.startable) {
+void move_piece(int &x, int &y, piece &p, card c) {
+	//can you start a piece?
 		//red start
 		if (p.get_fill().red == 1 && p.get_fill().green == 0 
 			&& 80 <= p.get_piece_space_number() && p.get_piece_space_number() <= 83
+			&& c.startable
 			) {
-			p.set_space(game_board[4]);
+			cout << p.get_piece_space_number() << endl;
+				p.set_space(game_board[4]);
 				x = game_board[4].get_x_center();
 				y = game_board[4].get_y_center();
+				cout << p.get_piece_space_number() << endl;
 		}
 		//blue start
 		else if (p.get_fill().blue == 1
 			&& 84 <= p.get_piece_space_number() && p.get_piece_space_number() <= 87
+			&& c.startable
 			) {
 			p.set_space(game_board[19]);
 			x = game_board[19].get_x_center();
 			y = game_board[19].get_y_center();
+			cout << p.get_piece_space_number() << endl;
 		}
 		//yellow start
 		else if (p.get_fill().red == 1 && p.get_fill().green == 1
 			&& 88 <= p.get_piece_space_number() && p.get_piece_space_number() <= 91
+			&& c.startable
 			) {
 			p.set_space(game_board[34]);
 			x = game_board[34].get_x_center();
 			y = game_board[34].get_y_center();
+			cout << p.get_piece_space_number() << endl;
 		}
 		//green start
 		else if (p.get_fill().green == 1 && p.get_fill().red == 0
 			&& 92 <= p.get_piece_space_number() && p.get_piece_space_number() <= 95
+			&& c.startable
 			) {
 			p.set_space(game_board[49]);
 			x = game_board[49].get_x_center();
 			y = game_board[49].get_y_center();
+			cout << p.get_piece_space_number() << endl;
 		}
-	}
-	else if (c.get_face() == "3"){
-		if (p.get_fill().red == 1 && p.get_fill().green == 0
-			&& p.get_fill().blue == 0) {
-			x = 7 * space_pixel_width + (space_pixel_width / 2);
-			y = space_pixel_width / 2;
+		//other moves
+		else 
+			{
+			cout << "move attempt" << endl;
+			cout << p.get_piece_space_number() << endl;
+			cout << c.move_rules << endl;
+			int final_space = p.get_piece_space_number() + c.move_rules;
+			cout << final_space << endl;
+			p.set_space(game_board[final_space]);
+			x = game_board[final_space].get_x_center();
+			y = game_board[final_space].get_y_center();
+			cout << p.get_piece_space_number() << endl;
 		}
-	}
+
+	//else if (c.get_face() == "3"){
+	//	if (p.get_fill().red == 1 && p.get_fill().green == 0
+	//		&& p.get_fill().blue == 0) {
+	//		x = 7 * space_pixel_width + (space_pixel_width / 2);
+	//		y = space_pixel_width / 2;
+	//	}
+	//}
+	//else if (c.get_face() == "4") {
+	//	//FINDME
+	//	x = red_home_run[2].get_x_center();
+	//	y = red_home_run[2].get_y_center();
+	//	red_home.push_back(p);
+	//}
+
 	glutPostRedisplay();
 }
 
@@ -1699,8 +1728,10 @@ int graphicsPlay(int argc, char** argv) {
 
 
 
-	if (red1.get_piece_space_number() == 96 && red2.get_piece_space_number() == 97 && red3.get_piece_space_number() == 98
-		&& red4.get_piece_space_number() == 99) {
+	if (red_home.size() > 1
+		//red1.get_piece_space_number() == 96 && red2.get_piece_space_number() == 97 && red3.get_piece_space_number() == 98
+		//&& red4.get_piece_space_number() == 99
+		) {
 		cout << "red wins!" << endl;
 	}
 	else if ( blue1.get_piece_space_number() == 100 && blue2.get_piece_space_number() == 101 && blue2.get_piece_space_number() == 102 
