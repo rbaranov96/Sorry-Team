@@ -92,6 +92,8 @@ void startinit() {
     startheight = 720;
     startmouse_x = startmouse_y = 0;
     
+    init();
+    
 }
 
 
