@@ -10,6 +10,7 @@
 #include "graphics.hpp"
 #include "card_deck.h"
 #include "card.h"
+#include "space.h"
 
 using namespace std;
 
@@ -20,7 +21,11 @@ card_deck discard_deck;
 card_deck draw_deck;
 card drawn_card = card(one);
 int space_pixel_width = 45;
-vector<piece> game_board;
+vector<space> game_board;
+vector<space> red_home_run;
+vector<space> blue_home_run;
+vector<space> yellow_home_run;
+vector<space> green_home_run;
 vector<piece> red_start;
 vector<piece> blue_start;
 vector<piece> yellow_start;
@@ -162,7 +167,7 @@ void draw_gameboard() {
 	//Draw the spaces around the edge of the board
 	//Author: Jay Brideau
 	//top row of game board
-	//space no:
+	//space no: 0
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i(0, 0);
@@ -170,7 +175,9 @@ void draw_gameboard() {
 	glVertex2i((1 * space_pixel_width), (1 * space_pixel_width));
 	glVertex2i(0, (1 * space_pixel_width));
 	glEnd();
-	//space no:
+	space space0 = space(0, 0 * space_pixel_width + (space_pixel_width / 2), 0 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space0);
+	//space no: 1
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i(space_pixel_width, 0);
@@ -178,8 +185,9 @@ void draw_gameboard() {
 	glVertex2i((2 * space_pixel_width), (1 * space_pixel_width));
 	glVertex2i(space_pixel_width, (1 * space_pixel_width));
 	glEnd();
-
-	//space no:
+	space space1 = space(1, 1 * space_pixel_width + (space_pixel_width / 2), 0 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space1);
+	//space no: 2
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((2 * space_pixel_width), 0);
@@ -187,7 +195,9 @@ void draw_gameboard() {
 	glVertex2i((3 * space_pixel_width), (1 * space_pixel_width));
 	glVertex2i((2 * space_pixel_width), (1 * space_pixel_width));
 	glEnd();
-	//space no:
+	space space2 = space(2, 2 * space_pixel_width + (space_pixel_width / 2), 0 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space2);
+	//space no: 3
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((3 * space_pixel_width), 0);
@@ -195,7 +205,9 @@ void draw_gameboard() {
 	glVertex2i((4 * space_pixel_width), (1 * space_pixel_width));
 	glVertex2i((3 * space_pixel_width), (1 * space_pixel_width));
 	glEnd();
-	//space no: 0
+	space space3 = space(3, 3 * space_pixel_width + (space_pixel_width / 2), 0 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space3);
+	//space no: 4
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((4 * space_pixel_width), 0);
@@ -203,7 +215,9 @@ void draw_gameboard() {
 	glVertex2i((5 * space_pixel_width), (1 * space_pixel_width));
 	glVertex2i((4 * space_pixel_width), (1 * space_pixel_width));
 	glEnd();
-	//space no: 1
+	space space4 = space(4, 4 * space_pixel_width + (space_pixel_width / 2), 0 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space4);
+	//space no: 5
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((5 * space_pixel_width), 0);
@@ -211,7 +225,9 @@ void draw_gameboard() {
 	glVertex2i((6 * space_pixel_width), (1 * space_pixel_width));
 	glVertex2i((5 * space_pixel_width), (1 * space_pixel_width));
 	glEnd();
-	//space no: 2
+	space space5 = space(5, 5 * space_pixel_width + (space_pixel_width / 2), 0 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space5);
+	//space no: 6
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((6 * space_pixel_width), 0);
@@ -219,7 +235,9 @@ void draw_gameboard() {
 	glVertex2i((7 * space_pixel_width), (1 * space_pixel_width));
 	glVertex2i((6 * space_pixel_width), (1 * space_pixel_width));
 	glEnd();
-	//space no: 3
+	space space6 = space(6, 6 * space_pixel_width + (space_pixel_width / 2), 0 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space6);
+	//space no: 7
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((7 * space_pixel_width), 0);
@@ -227,7 +245,9 @@ void draw_gameboard() {
 	glVertex2i((8 * space_pixel_width), (1 * space_pixel_width));
 	glVertex2i((7 * space_pixel_width), (1 * space_pixel_width));
 	glEnd();
-	//space no: 4
+	space space7 = space(7, 7 * space_pixel_width + (space_pixel_width / 2), 0 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space7);
+	//space no: 8
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((8 * space_pixel_width), 0);
@@ -235,7 +255,9 @@ void draw_gameboard() {
 	glVertex2i((9 * space_pixel_width), (1 * space_pixel_width));
 	glVertex2i((8 * space_pixel_width), (1 * space_pixel_width));
 	glEnd();
-	//space no: 5
+	space space8 = space(8, 8 * space_pixel_width + (space_pixel_width / 2), 0 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space8);
+	//space no: 9
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((9 * space_pixel_width), 0);
@@ -243,7 +265,9 @@ void draw_gameboard() {
 	glVertex2i((10 * space_pixel_width), (1 * space_pixel_width));
 	glVertex2i((9 * space_pixel_width), (1 * space_pixel_width));
 	glEnd();
-	//space no: 6
+	space space9 = space(9, 9 * space_pixel_width + (space_pixel_width / 2), 0 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space9);
+	//space no: 10
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((10 * space_pixel_width), 0);
@@ -251,7 +275,9 @@ void draw_gameboard() {
 	glVertex2i((11 * space_pixel_width), (1 * space_pixel_width));
 	glVertex2i((10 * space_pixel_width), (1 * space_pixel_width));
 	glEnd();
-	//space no: 7
+	space space10 = space(10, 10 * space_pixel_width + (space_pixel_width / 2), 0 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space10);
+	//space no: 11
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((11 * space_pixel_width), 0);
@@ -259,7 +285,9 @@ void draw_gameboard() {
 	glVertex2i((12 * space_pixel_width), (1 * space_pixel_width));
 	glVertex2i((11 * space_pixel_width), (1 * space_pixel_width));
 	glEnd();
-	//space no: 8
+	space space11 = space(11, 11 * space_pixel_width + (space_pixel_width / 2), 0 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space11);
+	//space no: 12
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((12 * space_pixel_width), 0);
@@ -267,7 +295,9 @@ void draw_gameboard() {
 	glVertex2i((13 * space_pixel_width), (1 * space_pixel_width));
 	glVertex2i((12 * space_pixel_width), (1 * space_pixel_width));
 	glEnd();
-	//space no: 9
+	space space12 = space(12, 12 * space_pixel_width + (space_pixel_width / 2), 0 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space12);
+	//space no: 13
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((13 * space_pixel_width), 0);
@@ -275,7 +305,9 @@ void draw_gameboard() {
 	glVertex2i((14 * space_pixel_width), (1 * space_pixel_width));
 	glVertex2i((13 * space_pixel_width), (1 * space_pixel_width));
 	glEnd();
-	//space no: 10
+	space space13 = space(13, 13 * space_pixel_width + (space_pixel_width / 2), 0 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space13);
+	//space no: 14
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((14 * space_pixel_width), 0);
@@ -283,7 +315,9 @@ void draw_gameboard() {
 	glVertex2i((15 * space_pixel_width), (1 * space_pixel_width));
 	glVertex2i((14 * space_pixel_width), (1 * space_pixel_width));
 	glEnd();
-	//space no: 11
+	space space14 = space(14, 14 * space_pixel_width + (space_pixel_width / 2), 0 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space14);
+	//space no: 15
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((15 * space_pixel_width), 0);
@@ -291,8 +325,10 @@ void draw_gameboard() {
 	glVertex2i((16 * space_pixel_width), (1 * space_pixel_width));
 	glVertex2i((15 * space_pixel_width), (1 * space_pixel_width));
 	glEnd();
+	space space15 = space(15, 15 * space_pixel_width + (space_pixel_width / 2), 0 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space15);
 	//right side of game board
-	//space no: 12
+	//space no: 16
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((15 * space_pixel_width), (1 * space_pixel_width));
@@ -300,7 +336,9 @@ void draw_gameboard() {
 	glVertex2i((16 * space_pixel_width), (2 * space_pixel_width));
 	glVertex2i((15 * space_pixel_width), (2 * space_pixel_width));
 	glEnd();
-	//space no: 13
+	space space16 = space(16, 15 * space_pixel_width + (space_pixel_width / 2), 1 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space16);
+	//space no: 17
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((15 * space_pixel_width), (2 * space_pixel_width));
@@ -308,7 +346,9 @@ void draw_gameboard() {
 	glVertex2i((16 * space_pixel_width), (3 * space_pixel_width));
 	glVertex2i((15 * space_pixel_width), (3 * space_pixel_width));
 	glEnd();
-	//space no: 14
+	space space17 = space(17, 15 * space_pixel_width + (space_pixel_width / 2), 2 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space17);
+	//space no: 18
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((15 * space_pixel_width), (3 * space_pixel_width));
@@ -316,7 +356,9 @@ void draw_gameboard() {
 	glVertex2i((16 * space_pixel_width), (4 * space_pixel_width));
 	glVertex2i((15 * space_pixel_width), (4 * space_pixel_width));
 	glEnd();
-	//space no: 15
+	space space18 = space(18, 15 * space_pixel_width + (space_pixel_width / 2), 3 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space18);
+	//space no: 19
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((15 * space_pixel_width), (4 * space_pixel_width));
@@ -324,7 +366,9 @@ void draw_gameboard() {
 	glVertex2i((16 * space_pixel_width), (5 * space_pixel_width));
 	glVertex2i((15 * space_pixel_width), (5 * space_pixel_width));
 	glEnd();
-	//space no: 16
+	space space19 = space(19, 15 * space_pixel_width + (space_pixel_width / 2), 4 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space19);
+	//space no: 20
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((15 * space_pixel_width), (5 * space_pixel_width));
@@ -332,7 +376,9 @@ void draw_gameboard() {
 	glVertex2i((16 * space_pixel_width), (6 * space_pixel_width));
 	glVertex2i((15 * space_pixel_width), (6 * space_pixel_width));
 	glEnd();
-	//space no: 17
+	space space20 = space(20, 15 * space_pixel_width + (space_pixel_width / 2), 5 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space20);
+	//space no: 21
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((15 * space_pixel_width), (6 * space_pixel_width));
@@ -340,7 +386,9 @@ void draw_gameboard() {
 	glVertex2i((16 * space_pixel_width), (7 * space_pixel_width));
 	glVertex2i((15 * space_pixel_width), (7 * space_pixel_width));
 	glEnd();
-	//space no: 18
+	space space21 = space(21, 15 * space_pixel_width + (space_pixel_width / 2), 6 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space21);
+	//space no: 22
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((15 * space_pixel_width), (7 * space_pixel_width));
@@ -348,7 +396,9 @@ void draw_gameboard() {
 	glVertex2i((16 * space_pixel_width), (8 * space_pixel_width));
 	glVertex2i((15 * space_pixel_width), (8 * space_pixel_width));
 	glEnd();
-	//space no: 19
+	space space22 = space(22, 15 * space_pixel_width + (space_pixel_width / 2), 7 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space22);
+	//space no: 23
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((15 * space_pixel_width), (8 * space_pixel_width));
@@ -356,7 +406,9 @@ void draw_gameboard() {
 	glVertex2i((16 * space_pixel_width), (9 * space_pixel_width));
 	glVertex2i((15 * space_pixel_width), (9 * space_pixel_width));
 	glEnd();
-	//space no: 20
+	space space23 = space(23, 15 * space_pixel_width + (space_pixel_width / 2), 8 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space23);
+	//space no: 24
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((15 * space_pixel_width), (9 * space_pixel_width));
@@ -364,7 +416,9 @@ void draw_gameboard() {
 	glVertex2i((16 * space_pixel_width), (10 * space_pixel_width));
 	glVertex2i((15 * space_pixel_width), (10 * space_pixel_width));
 	glEnd();
-	//space no: 21
+	space space24 = space(24, 15 * space_pixel_width + (space_pixel_width / 2), 9 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space24);
+	//space no: 25
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((15 * space_pixel_width), (10 * space_pixel_width));
@@ -372,7 +426,9 @@ void draw_gameboard() {
 	glVertex2i((16 * space_pixel_width), (11 * space_pixel_width));
 	glVertex2i((15 * space_pixel_width), (11 * space_pixel_width));
 	glEnd();
-	//space no: 22
+	space space25 = space(25, 15 * space_pixel_width + (space_pixel_width / 2), 10 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space25);
+	//space no: 26
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((15 * space_pixel_width), (11 * space_pixel_width));
@@ -380,7 +436,9 @@ void draw_gameboard() {
 	glVertex2i((16 * space_pixel_width), (12 * space_pixel_width));
 	glVertex2i((15 * space_pixel_width), (12 * space_pixel_width));
 	glEnd();
-	//space no: 23
+	space space26 = space(26, 15 * space_pixel_width + (space_pixel_width / 2), 11 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space26);
+	//space no: 27
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((15 * space_pixel_width), (12 * space_pixel_width));
@@ -388,7 +446,9 @@ void draw_gameboard() {
 	glVertex2i((16 * space_pixel_width), (13 * space_pixel_width));
 	glVertex2i((15 * space_pixel_width), (13 * space_pixel_width));
 	glEnd();
-	//space no: 24
+	space space27 = space(27, 15 * space_pixel_width + (space_pixel_width / 2), 12 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space27);
+	//space no: 28
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((15 * space_pixel_width), (13 * space_pixel_width));
@@ -396,7 +456,9 @@ void draw_gameboard() {
 	glVertex2i((16 * space_pixel_width), (14 * space_pixel_width));
 	glVertex2i((15 * space_pixel_width), (14 * space_pixel_width));
 	glEnd();
-	//space no: 25
+	space space28 = space(28, 15 * space_pixel_width + (space_pixel_width / 2), 13 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space28);
+	//space no: 29
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((15 * space_pixel_width), (14 * space_pixel_width));
@@ -404,7 +466,9 @@ void draw_gameboard() {
 	glVertex2i((16 * space_pixel_width), (15 * space_pixel_width));
 	glVertex2i((15 * space_pixel_width), (15 * space_pixel_width));
 	glEnd();
-	//space no: 26
+	space space29 = space(29, 15 * space_pixel_width + (space_pixel_width / 2), 14 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space29);
+	//space no: 30
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((15 * space_pixel_width), (15 * space_pixel_width));
@@ -412,8 +476,10 @@ void draw_gameboard() {
 	glVertex2i((16 * space_pixel_width), (16 * space_pixel_width));
 	glVertex2i((15 * space_pixel_width), (16 * space_pixel_width));
 	glEnd();
+	space space30 = space(30, 15 * space_pixel_width + (space_pixel_width / 2), 15 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space30);
 	//bottom row of game board
-	//space no: 27
+	//space no: 31
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((14 * space_pixel_width), (15 * space_pixel_width));
@@ -421,7 +487,9 @@ void draw_gameboard() {
 	glVertex2i((15 * space_pixel_width), (16 * space_pixel_width));
 	glVertex2i((14 * space_pixel_width), (16 * space_pixel_width));
 	glEnd();
-	//space no: 28
+	space space31 = space(31, 14 * space_pixel_width + (space_pixel_width / 2), 15 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space31);
+	//space no: 32
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((13 * space_pixel_width), (15 * space_pixel_width));
@@ -429,7 +497,9 @@ void draw_gameboard() {
 	glVertex2i((14 * space_pixel_width), (16 * space_pixel_width));
 	glVertex2i((13 * space_pixel_width), (16 * space_pixel_width));
 	glEnd();
-	//space no: 29
+	space space32 = space(32, 13 * space_pixel_width + (space_pixel_width / 2), 15 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space32);
+	//space no: 33
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((12 * space_pixel_width), (15 * space_pixel_width));
@@ -437,7 +507,9 @@ void draw_gameboard() {
 	glVertex2i((13 * space_pixel_width), (16 * space_pixel_width));
 	glVertex2i((12 * space_pixel_width), (16 * space_pixel_width));
 	glEnd();
-	//space no: 30
+	space space33 = space(33, 12 * space_pixel_width + (space_pixel_width / 2), 15 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space33);
+	//space no: 34
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((11 * space_pixel_width), (15 * space_pixel_width));
@@ -445,7 +517,9 @@ void draw_gameboard() {
 	glVertex2i((12 * space_pixel_width), (16 * space_pixel_width));
 	glVertex2i((11 * space_pixel_width), (16 * space_pixel_width));
 	glEnd();
-	//space no: 31
+	space space34 = space(34, 11 * space_pixel_width + (space_pixel_width / 2), 15 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space34);
+	//space no: 35
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((10 * space_pixel_width), (15 * space_pixel_width));
@@ -453,7 +527,9 @@ void draw_gameboard() {
 	glVertex2i((11 * space_pixel_width), (16 * space_pixel_width));
 	glVertex2i((10 * space_pixel_width), (16 * space_pixel_width));
 	glEnd();
-	//space no: 32
+	space space35 = space(35, 10 * space_pixel_width + (space_pixel_width / 2), 15 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space35);
+	//space no: 36
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((9 * space_pixel_width), (15 * space_pixel_width));
@@ -461,7 +537,9 @@ void draw_gameboard() {
 	glVertex2i((10 * space_pixel_width), (16 * space_pixel_width));
 	glVertex2i((9 * space_pixel_width), (16 * space_pixel_width));
 	glEnd();
-	//space no: 33
+	space space36 = space(36, 9 * space_pixel_width + (space_pixel_width / 2), 15 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space36);
+	//space no: 37
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((8 * space_pixel_width), (15 * space_pixel_width));
@@ -469,7 +547,9 @@ void draw_gameboard() {
 	glVertex2i((9 * space_pixel_width), (16 * space_pixel_width));
 	glVertex2i((8 * space_pixel_width), (16 * space_pixel_width));
 	glEnd();
-	//space no: 34
+	space space37 = space(37, 8 * space_pixel_width + (space_pixel_width / 2), 15 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space37);
+	//space no: 38
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((7 * space_pixel_width), (15 * space_pixel_width));
@@ -477,7 +557,9 @@ void draw_gameboard() {
 	glVertex2i((8 * space_pixel_width), (16 * space_pixel_width));
 	glVertex2i((7 * space_pixel_width), (16 * space_pixel_width));
 	glEnd();
-	//space no: 35
+	space space38 = space(38, 7 * space_pixel_width + (space_pixel_width / 2), 15 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space38);
+	//space no: 39
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((6 * space_pixel_width), (15 * space_pixel_width));
@@ -485,7 +567,9 @@ void draw_gameboard() {
 	glVertex2i((7 * space_pixel_width), (16 * space_pixel_width));
 	glVertex2i((6 * space_pixel_width), (16 * space_pixel_width));
 	glEnd();
-	//space no: 36
+	space space39 = space(39, 6 * space_pixel_width + (space_pixel_width / 2), 15 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space39);
+	//space no: 40
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((5 * space_pixel_width), (15 * space_pixel_width));
@@ -493,7 +577,9 @@ void draw_gameboard() {
 	glVertex2i((6 * space_pixel_width), (16 * space_pixel_width));
 	glVertex2i((5 * space_pixel_width), (16 * space_pixel_width));
 	glEnd();
-	//space no: 37
+	space space40 = space(40, 5 * space_pixel_width + (space_pixel_width / 2), 15 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space40);
+	//space no: 41
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((4 * space_pixel_width), (15 * space_pixel_width));
@@ -501,7 +587,9 @@ void draw_gameboard() {
 	glVertex2i((5 * space_pixel_width), (16 * space_pixel_width));
 	glVertex2i((4 * space_pixel_width), (16 * space_pixel_width));
 	glEnd();
-	//space no: 38
+	space space41 = space(41, 4 * space_pixel_width + (space_pixel_width / 2), 15 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space41);
+	//space no: 42
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((3 * space_pixel_width), (15 * space_pixel_width));
@@ -509,7 +597,9 @@ void draw_gameboard() {
 	glVertex2i((4 * space_pixel_width), (16 * space_pixel_width));
 	glVertex2i((3 * space_pixel_width), (16 * space_pixel_width));
 	glEnd();
-	//space no: 39
+	space space42 = space(42, 3 * space_pixel_width + (space_pixel_width / 2), 15 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space42);
+	//space no: 43
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((2 * space_pixel_width), (15 * space_pixel_width));
@@ -517,7 +607,9 @@ void draw_gameboard() {
 	glVertex2i((3 * space_pixel_width), (16 * space_pixel_width));
 	glVertex2i((2 * space_pixel_width), (16 * space_pixel_width));
 	glEnd();
-	//space no: 40
+	space space43 = space(43, 2 * space_pixel_width + (space_pixel_width / 2), 15 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space43);
+	//space no: 44
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((1 * space_pixel_width), (15 * space_pixel_width));
@@ -525,7 +617,9 @@ void draw_gameboard() {
 	glVertex2i((2 * space_pixel_width), (16 * space_pixel_width));
 	glVertex2i((1 * space_pixel_width), (16 * space_pixel_width));
 	glEnd();
-	//space no: 41
+	space space44 = space(44, 1 * space_pixel_width + (space_pixel_width / 2), 15 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space44);
+	//space no: 45
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((0 * space_pixel_width), (15 * space_pixel_width));
@@ -533,8 +627,10 @@ void draw_gameboard() {
 	glVertex2i((1 * space_pixel_width), (16 * space_pixel_width));
 	glVertex2i((0 * space_pixel_width), (16 * space_pixel_width));
 	glEnd();
+	space space45 = space(45, 0 * space_pixel_width + (space_pixel_width / 2), 15 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space45);
 	//left side of board game
-	//space no: 42
+	//space no: 46
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((0 * space_pixel_width), (14 * space_pixel_width));
@@ -542,7 +638,9 @@ void draw_gameboard() {
 	glVertex2i((1 * space_pixel_width), (15 * space_pixel_width));
 	glVertex2i((0 * space_pixel_width), (15 * space_pixel_width));
 	glEnd();
-	//space no: 43
+	space space46 = space(46, 0 * space_pixel_width + (space_pixel_width / 2), 14 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space46);
+	//space no: 47
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((0 * space_pixel_width), (13 * space_pixel_width));
@@ -550,7 +648,9 @@ void draw_gameboard() {
 	glVertex2i((1 * space_pixel_width), (14 * space_pixel_width));
 	glVertex2i((0 * space_pixel_width), (14 * space_pixel_width));
 	glEnd();
-	//space no: 44
+	space space47 = space(47, 0 * space_pixel_width + (space_pixel_width / 2), 13 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space47);
+	//space no: 48
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((0 * space_pixel_width), (12 * space_pixel_width));
@@ -558,7 +658,9 @@ void draw_gameboard() {
 	glVertex2i((1 * space_pixel_width), (13 * space_pixel_width));
 	glVertex2i((0 * space_pixel_width), (13 * space_pixel_width));
 	glEnd();
-	//space no: 45
+	space space48 = space(48, 0 * space_pixel_width + (space_pixel_width / 2), 12 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space48);
+	//space no: 49
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((0 * space_pixel_width), (11 * space_pixel_width));
@@ -566,7 +668,9 @@ void draw_gameboard() {
 	glVertex2i((1 * space_pixel_width), (12 * space_pixel_width));
 	glVertex2i((0 * space_pixel_width), (12 * space_pixel_width));
 	glEnd();
-	//space no: 46
+	space space49 = space(49, 0 * space_pixel_width + (space_pixel_width / 2), 11 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space49);
+	//space no: 50
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((0 * space_pixel_width), (10 * space_pixel_width));
@@ -574,7 +678,9 @@ void draw_gameboard() {
 	glVertex2i((1 * space_pixel_width), (11 * space_pixel_width));
 	glVertex2i((0 * space_pixel_width), (11 * space_pixel_width));
 	glEnd();
-	//space no: 47
+	space space50 = space(50, 0 * space_pixel_width + (space_pixel_width / 2), 10 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space50);
+	//space no: 51
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((0 * space_pixel_width), (9 * space_pixel_width));
@@ -582,7 +688,9 @@ void draw_gameboard() {
 	glVertex2i((1 * space_pixel_width), (10 * space_pixel_width));
 	glVertex2i((0 * space_pixel_width), (10 * space_pixel_width));
 	glEnd();
-	//space no: 48
+	space space51 = space(51, 0 * space_pixel_width + (space_pixel_width / 2), 9 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space51);
+	//space no: 52
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((0 * space_pixel_width), (8 * space_pixel_width));
@@ -590,7 +698,9 @@ void draw_gameboard() {
 	glVertex2i((1 * space_pixel_width), (9 * space_pixel_width));
 	glVertex2i((0 * space_pixel_width), (9 * space_pixel_width));
 	glEnd();
-	//space no: 49
+	space space52 = space(52, 0 * space_pixel_width + (space_pixel_width / 2), 8 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space52);
+	//space no: 53
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((0 * space_pixel_width), (7 * space_pixel_width));
@@ -598,7 +708,9 @@ void draw_gameboard() {
 	glVertex2i((1 * space_pixel_width), (8 * space_pixel_width));
 	glVertex2i((0 * space_pixel_width), (8 * space_pixel_width));
 	glEnd();
-	//space no: 50
+	space space53 = space(53, 0 * space_pixel_width + (space_pixel_width / 2), 7 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space53);
+	//space no: 54
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((0 * space_pixel_width), (6 * space_pixel_width));
@@ -606,7 +718,9 @@ void draw_gameboard() {
 	glVertex2i((1 * space_pixel_width), (7 * space_pixel_width));
 	glVertex2i((0 * space_pixel_width), (7 * space_pixel_width));
 	glEnd();
-	//space no: 51
+	space space54 = space(54, 0 * space_pixel_width + (space_pixel_width / 2), 6 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space54);
+	//space no: 55
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((0 * space_pixel_width), (5 * space_pixel_width));
@@ -614,7 +728,9 @@ void draw_gameboard() {
 	glVertex2i((1 * space_pixel_width), (6 * space_pixel_width));
 	glVertex2i((0 * space_pixel_width), (6 * space_pixel_width));
 	glEnd();
-	//space no: 52
+	space space55 = space(55, 0 * space_pixel_width + (space_pixel_width / 2), 5 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space55);
+	//space no: 56
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((0 * space_pixel_width), (4 * space_pixel_width));
@@ -622,7 +738,9 @@ void draw_gameboard() {
 	glVertex2i((1 * space_pixel_width), (5 * space_pixel_width));
 	glVertex2i((0 * space_pixel_width), (5 * space_pixel_width));
 	glEnd();
-	//space no: 53
+	space space56 = space(56, 0 * space_pixel_width + (space_pixel_width / 2), 4 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space56);
+	//space no: 57
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((0 * space_pixel_width), (3 * space_pixel_width));
@@ -630,7 +748,9 @@ void draw_gameboard() {
 	glVertex2i((1 * space_pixel_width), (4 * space_pixel_width));
 	glVertex2i((0 * space_pixel_width), (4 * space_pixel_width));
 	glEnd();
-	//space no: 54
+	space space57 = space(57, 0 * space_pixel_width + (space_pixel_width / 2), 3 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space57);
+	//space no: 58
 	glBegin(GL_QUADS);
 	glColor3f(0.8, 1, 0.8);
 	glVertex2i((0 * space_pixel_width), (2 * space_pixel_width));
@@ -638,7 +758,9 @@ void draw_gameboard() {
 	glVertex2i((1 * space_pixel_width), (3 * space_pixel_width));
 	glVertex2i((0 * space_pixel_width), (3 * space_pixel_width));
 	glEnd();
-	//space no: 55
+	space space58 = space(58, 0 * space_pixel_width + (space_pixel_width / 2), 2 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space58);
+	//space no: 59
 	glBegin(GL_QUADS);
 	glColor3f(1, 1, 1);
 	glVertex2i((0 * space_pixel_width), (1 * space_pixel_width));
@@ -646,8 +768,10 @@ void draw_gameboard() {
 	glVertex2i((1 * space_pixel_width), (2 * space_pixel_width));
 	glVertex2i((0 * space_pixel_width), (2 * space_pixel_width));
 	glEnd();
+	space space59 = space(59, 0 * space_pixel_width + (space_pixel_width / 2), 1 * space_pixel_width + (space_pixel_width / 2));
+	game_board.push_back(space59);
 	//draw red home stretch
-	//space no:
+	//space no: 60
 	glBegin(GL_QUADS);
 	glColor3f(1, 0.9, 0.9);
 	glVertex2i((2 * space_pixel_width), (1 * space_pixel_width));
@@ -655,7 +779,9 @@ void draw_gameboard() {
 	glVertex2i((3 * space_pixel_width), (2 * space_pixel_width));
 	glVertex2i((2 * space_pixel_width), (2 * space_pixel_width));
 	glEnd();
-	//space no:
+	space space60 = space(60, 2 * space_pixel_width + (space_pixel_width / 2), 1 * space_pixel_width + (space_pixel_width / 2));
+	red_home_run.push_back(space60);
+	//space no: 61
 	glBegin(GL_QUADS);
 	glColor3f(1, 0.8, 0.8);
 	glVertex2i((2 * space_pixel_width), (2 * space_pixel_width));
@@ -663,7 +789,9 @@ void draw_gameboard() {
 	glVertex2i((3 * space_pixel_width), (3 * space_pixel_width));
 	glVertex2i((2 * space_pixel_width), (3 * space_pixel_width));
 	glEnd();
-	//space no:
+	space space61 = space(61, 2 * space_pixel_width + (space_pixel_width / 2), 2 * space_pixel_width + (space_pixel_width / 2));
+	red_home_run.push_back(space61);
+	//space no: 62
 	glBegin(GL_QUADS);
 	glColor3f(1, 0.7, 0.7);
 	glVertex2i((2 * space_pixel_width), (3 * space_pixel_width));
@@ -671,7 +799,9 @@ void draw_gameboard() {
 	glVertex2i((3 * space_pixel_width), (4 * space_pixel_width));
 	glVertex2i((2 * space_pixel_width), (4 * space_pixel_width));
 	glEnd();
-	//space no:
+	space space62 = space(62, 2 * space_pixel_width + (space_pixel_width / 2), 3 * space_pixel_width + (space_pixel_width / 2));
+	red_home_run.push_back(space62);
+	//space no: 63
 	glBegin(GL_QUADS);
 	glColor3f(1, 0.6, 0.6);
 	glVertex2i((2 * space_pixel_width), (4 * space_pixel_width));
@@ -679,7 +809,9 @@ void draw_gameboard() {
 	glVertex2i((3 * space_pixel_width), (5 * space_pixel_width));
 	glVertex2i((2 * space_pixel_width), (5 * space_pixel_width));
 	glEnd();
-	//space no:
+	space space63 = space(63, 2 * space_pixel_width + (space_pixel_width / 2), 3 * space_pixel_width + (space_pixel_width / 2));
+	red_home_run.push_back(space63);
+	//space no: 64
 	glBegin(GL_QUADS);
 	glColor3f(1, 0.5, 0.5);
 	glVertex2i((2 * space_pixel_width), (5 * space_pixel_width));
@@ -687,6 +819,8 @@ void draw_gameboard() {
 	glVertex2i((3 * space_pixel_width), (6 * space_pixel_width));
 	glVertex2i((2 * space_pixel_width), (6 * space_pixel_width));
 	glEnd();
+	space space64 = space(64, 2 * space_pixel_width + (space_pixel_width / 2), 4 * space_pixel_width + (space_pixel_width / 2));
+	red_home_run.push_back(space64);
 	//blue home run
 	//space no:
 	glBegin(GL_QUADS);
@@ -1214,23 +1348,23 @@ void move_piece(int &x, int &y, piece p, card c) {
 	if (c.startable) {
 		//red start
 		if (p.get_fill().red == 1 && p.get_fill().green == 0) {
-			x = 4 * space_pixel_width + (space_pixel_width / 2);
-			y = space_pixel_width / 2;
+			x = game_board[4].get_x_center();
+			y = game_board[4].get_y_center();
 		}
 		//blue start
 		else if (p.get_fill().blue == 1) {
-			x = 15 * space_pixel_width + (space_pixel_width / 2);
-			y = 4 * space_pixel_width + (space_pixel_width / 2);
+			x = game_board[19].get_x_center();
+			y = game_board[19].get_y_center();
 		}
 		//yellow start
 		else if (p.get_fill().red == 1 && p.get_fill().green == 1) {
-			x = 11 * space_pixel_width + (space_pixel_width / 2);
-			y = 15 * space_pixel_width + (space_pixel_width / 2);
+			x = game_board[34].get_x_center();
+			y = game_board[34].get_y_center();
 		}
 		//green start
 		else if (p.get_fill().green == 1 && p.get_fill().red == 0) {
-			x = (space_pixel_width / 2);
-			y = 11 * space_pixel_width + (space_pixel_width / 2);
+			x = game_board[49].get_x_center();
+			y = game_board[49].get_y_center();
 		}
 	}
 	else if (c.get_face() == "3"){
